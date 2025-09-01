@@ -1,121 +1,109 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sudan Store 🎮</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Sudan Store</title>
   <style>
-    body { font-family: Tahoma, sans-serif; margin: 0; background: #f5f6fa; color: #333; }
-    header { background: #1e1e2f; color: #fff; padding: 15px; text-align: center; }
-    header img { width: 40px; vertical-align: middle; }
-    header h1 { display: inline; font-size: 22px; margin-right: 10px; }
-
-    nav { background: #2c2c44; padding: 10px; text-align: center; }
-    nav a { color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold; }
-    nav a:hover { color: #ffd700; }
-
-    section { padding: 20px; }
-    h2 { color: #1e1e2f; margin-bottom: 15px; }
-
-    .services, .prices, .payment, .cart { background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
-    th { background: #1e1e2f; color: #fff; }
-
-    button { background: #1e1e2f; color: #fff; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #333; }
-
-    footer { background: #1e1e2f; color: #fff; padding: 15px; text-align: center; }
-
-    .whatsapp { position: fixed; bottom: 20px; left: 20px; background: #25D366; color: #fff; padding: 12px 18px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 3px 6px rgba(0,0,0,0.2); }
+    body {font-family: Tahoma, sans-serif; direction: rtl; background: #f9f9f9; margin: 0; padding: 0;}
+    header {background: #222; color: #fff; padding: 15px; text-align: center;}
+    header h1 {margin: 0; font-size: 26px;}
+    .container {width: 90%; margin: auto; padding: 20px;}
+    .services, .prices, .cart, .payment {background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
+    h2 {color: #444; margin-bottom: 15px;}
+    ul {list-style: none; padding: 0;}
+    ul li {margin-bottom: 8px;}
+    .product {display: flex; justify-content: space-between; margin-bottom: 10px;}
+    button {background: #28a745; color: #fff; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer;}
+    button:hover {background: #218838;}
+    .cart-items {margin-bottom: 10px;}
+    .cart-items div {display: flex; justify-content: space-between; margin-bottom: 5px;}
+    .whatsapp-float {position: fixed; bottom: 20px; left: 20px; background: #25d366; color: #fff; font-size: 22px; padding: 12px 18px; border-radius: 50px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2);}
   </style>
 </head>
-<body>
+<body>  <header>
+    <h1>🎮 Sudan Store</h1>
+    <p>شحن ألعاب فيديو وبطاقات</p>
+  </header>  <div class="container">
+    <section class="services">
+      <h2>الخدمات</h2>
+      <ul>
+        <li>✅ شحن فري فاير فوري / بطاقات (متوفر)</li>
+        <li>⏳ شحن ببجي (قريباً)</li>
+      </ul>
+    </section><section class="prices">
+  <h2>قائمة أسعار فري فاير</h2>
+  <div class="product">110 جوهرة 💎 - 3600 SDG <button onclick="addToCart('110 جوهرة',3600)">إضافة</button></div>
+  <div class="product">210 جوهرة 💎 - 7500 SDG <button onclick="addToCart('210 جوهرة',7500)">إضافة</button></div>
+  <div class="product">583 جوهرة 💎 - 18000 SDG <button onclick="addToCart('583 جوهرة',18000)">إضافة</button></div>
+  <div class="product">1180 جوهرة 💎 - 35500 SDG <button onclick="addToCart('1180 جوهرة',35500)">إضافة</button></div>
+  <div class="product">2420 جوهرة 💎 - 70500 SDG <button onclick="addToCart('2420 جوهرة',70500)">إضافة</button></div>
+  <div class="product">ترقية المستوى 🔥 - 18000 SDG <button onclick="addToCart('ترقية المستوى',18000)">إضافة</button></div>
+  <div class="product">عضوية أسبوعية 📅 - 9000 SDG <button onclick="addToCart('عضوية أسبوعية',9000)">إضافة</button></div>
+  <div class="product">عضوية شهرية 📅 - 39000 SDG <button onclick="addToCart('عضوية شهرية',39000)">إضافة</button></div>
+</section>
 
-<header>
-  <img src="https://cdn-icons-png.flaticon.com/512/5969/5969247.png" alt="logo">
-  <h1>Sudan Store 🎮</h1>
-</header>
+<section class="cart">
+  <h2>🛒 سلة المشتريات</h2>
+  <div class="cart-items" id="cartItems"></div>
+  <p><strong>الإجمالي:</strong> <span id="total">0</span> SDG</p>
+</section>
 
-<nav>
-  <a href="#services">الخدمات</a>
-  <a href="#prices">الأسعار</a>
-  <a href="#payment">طرق الدفع</a>
-  <a href="#cart">سلة المشتريات</a>
-</nav>
-
-<section id="services" class="services">
-  <h2>خدماتنا</h2>
+<section class="payment">
+  <h2>طرق الدفع</h2>
   <ul>
-    <li>✅ شحن فري فاير – متوفر الآن</li>
-    <li>🕒 شحن ببجي – قريباً</li>
+    <li>💳 بنكك – رقم الحساب: 1966784 – الاسم: خالد محمد موسى</li>
+    <li>📱 ماي كاشي – 400774522</li>
+    <li>📲 برافو كاش – 79560447</li>
   </ul>
 </section>
 
-<section id="prices" class="prices">
-  <h2>قائمة أسعار فري فاير 💎</h2>
-  <table>
-    <tr><th>الباقة</th><th>السعر (SDG)</th><th></th></tr>
-    <tr><td>110 جوهرة</td><td>3600</td><td><button onclick="addToCart('110 جوهرة', 3600)">إضافة</button></td></tr>
-    <tr><td>210 جوهرة</td><td>7500</td><td><button onclick="addToCart('210 جوهرة', 7500)">إضافة</button></td></tr>
-    <tr><td>583 جوهرة</td><td>18000</td><td><button onclick="addToCart('583 جوهرة', 18000)">إضافة</button></td></tr>
-    <tr><td>1180 جوهرة</td><td>35500</td><td><button onclick="addToCart('1180 جوهرة', 35500)">إضافة</button></td></tr>
-    <tr><td>2420 جوهرة</td><td>70500</td><td><button onclick="addToCart('2420 جوهرة', 70500)">إضافة</button></td></tr>
-    <tr><td>ترقية المستوى (كل المستويات)</td><td>18000</td><td><button onclick="addToCart('ترقية المستوى', 18000)">إضافة</button></td></tr>
-    <tr><td>العضوية الأسبوعية</td><td>9000</td><td><button onclick="addToCart('العضوية الأسبوعية', 9000)">إضافة</button></td></tr>
-    <tr><td>العضوية الشهرية</td><td>39000</td><td><button onclick="addToCart('العضوية الشهرية', 39000)">إضافة</button></td></tr>
-  </table>
-</section>
+  </div>  <!-- زر واتساب --><a id="checkoutBtn" href="#" class="whatsapp-float">💬</a>
 
-<section id="payment" class="payment">
-  <h2>طرق الدفع المتاحة ✅</h2>
-  <p>💳 بنكك – رقم الحساب: <b>1966784</b> – الاسم: <b>خالد محمد موسى</b></p>
-  <p>📱 ماي كاشي – رقم المحفظة: <b>400774522</b></p>
-  <p>📲 برافو كاش – رقم المحفظة: <b>79560447</b></p>
-</section>
+  <script>
+    let cart = [];
 
-<section id="cart" class="cart">
-  <h2>سلة المشتريات 🛒</h2>
-  <ul id="cart-list"></ul>
-  <p><b>الإجمالي: </b><span id="total">0</span> SDG</p>
-</section>
+    function addToCart(name, price) {
+      const item = cart.find(i => i.name === name);
+      if (item) {
+        item.qty++;
+      } else {
+        cart.push({name, price, qty: 1});
+      }
+      updateCart();
+    }
 
-<footer>
-  <p>© 2025 Sudan Store – جميع الحقوق محفوظة</p>
-</footer>
+    function removeFromCart(name) {
+      cart = cart.filter(i => i.name !== name);
+      updateCart();
+    }
 
-<a class="whatsapp" href="https://wa.me/249116431929" target="_blank">
-  <i class="fab fa-whatsapp"></i> تواصل واتساب
-</a>
+    function updateCart() {
+      const cartItemsDiv = document.getElementById("cartItems");
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        cartItemsDiv.innerHTML += `<div>${item.name} × ${item.qty} = ${item.price * item.qty} SDG <button onclick="removeFromCart('${item.name}')">❌</button></div>`;
+      });
+      document.getElementById("total").innerText = total;
+      updateWhatsAppLink();
+    }
 
-<script>
-  let cart = [];
-  let total = 0;
+    function updateWhatsAppLink() {
+      const whatsappNumber = "249116431929";
+      let message = "🛒 طلب جديد من Sudan Store:\n\n";
 
-  function addToCart(item, price) {
-    cart.push({item, price});
-    total += price;
-    updateCart();
-  }
+      if (cart.length === 0) {
+        message += "السلة فارغة ❌";
+      } else {
+        cart.forEach(item => {
+          message += `- ${item.name} × ${item.qty} = ${item.price * item.qty} SDG\n`;
+        });
+        message += `\nالإجمالي: ${cart.reduce((sum, i) => sum + i.price * i.qty, 0)} SDG ✅`;
+      }
 
-  function updateCart() {
-    const cartList = document.getElementById("cart-list");
-    cartList.innerHTML = "";
-    cart.forEach((c, index) => {
-      cartList.innerHTML += `<li>${c.item} - ${c.price} SDG 
-        <button onclick="removeFromCart(${index})">❌</button></li>`;
-    });
-    document.getElementById("total").textContent = total;
-  }
-
-  function removeFromCart(index) {
-    total -= cart[index].price;
-    cart.splice(index, 1);
-    updateCart();
-  }
-</script>
-
-</body>
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      document.getElementById("checkoutBtn").setAttribute("href", url);
+    }
+  </script></body>
       </html>
