@@ -1,73 +1,166 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sudan Store</title>
   <style>
-    body {font-family: Tahoma, sans-serif; direction: rtl; background: #f9f9f9; margin: 0; padding: 0;}
-    header {background: #222; color: #fff; padding: 15px; text-align: center;}
-    header h1 {margin: 0; font-size: 26px;}
-    .container {width: 90%; margin: auto; padding: 20px;}
-    .services, .prices, .cart, .payment {background: #fff; padding: 20px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);}
-    h2 {color: #444; margin-bottom: 15px;}
-    ul {list-style: none; padding: 0;}
-    ul li {margin-bottom: 8px;}
-    .product {display: flex; justify-content: space-between; margin-bottom: 10px;}
-    button {background: #28a745; color: #fff; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer;}
-    button:hover {background: #218838;}
-    .cart-items {margin-bottom: 10px;}
-    .cart-items div {display: flex; justify-content: space-between; margin-bottom: 5px;}
-    .whatsapp-float {position: fixed; bottom: 20px; left: 20px; background: #25d366; color: #fff; font-size: 22px; padding: 12px 18px; border-radius: 50px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2);}
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      direction: rtl;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(90deg,#4b79a1,#283e51);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 16px;
+    }
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px 0;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #4b79a1;
+      padding-bottom: 5px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    .product {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    .product button {
+      background: #4b79a1;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .product button:hover {
+      background: #283e51;
+    }
+    .cart-items div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .cart-total {
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #25d366;
+      color: #fff;
+      font-size: 22px;
+      padding: 12px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
-<body>  <header>
+<body>
+  <header>
     <h1>🎮 Sudan Store</h1>
-    <p>شحن ألعاب فيديو وبطاقات</p>
-  </header>  <div class="container">
-    <section class="services">
+    <p>شحن ألعاب فيديو وبطاقات – الأسعار بالـ SDG و EGP</p>
+  </header>
+
+  <div class="container">
+    <!-- الخدمات -->
+    <section class="card">
       <h2>الخدمات</h2>
       <ul>
         <li>✅ شحن فري فاير فوري / بطاقات (متوفر)</li>
         <li>⏳ شحن ببجي (قريباً)</li>
       </ul>
-    </section><section class="prices">
-  <h2>قائمة أسعار فري فاير</h2>
-  <div class="product">110 جوهرة 💎 - 3600 SDG <button onclick="addToCart('110 جوهرة',3600)">إضافة</button></div>
-  <div class="product">210 جوهرة 💎 - 7500 SDG <button onclick="addToCart('210 جوهرة',7500)">إضافة</button></div>
-  <div class="product">583 جوهرة 💎 - 18000 SDG <button onclick="addToCart('583 جوهرة',18000)">إضافة</button></div>
-  <div class="product">1180 جوهرة 💎 - 35500 SDG <button onclick="addToCart('1180 جوهرة',35500)">إضافة</button></div>
-  <div class="product">2420 جوهرة 💎 - 70500 SDG <button onclick="addToCart('2420 جوهرة',70500)">إضافة</button></div>
-  <div class="product">ترقية المستوى 🔥 - 18000 SDG <button onclick="addToCart('ترقية المستوى',18000)">إضافة</button></div>
-  <div class="product">عضوية أسبوعية 📅 - 9000 SDG <button onclick="addToCart('عضوية أسبوعية',9000)">إضافة</button></div>
-  <div class="product">عضوية شهرية 📅 - 39000 SDG <button onclick="addToCart('عضوية شهرية',39000)">إضافة</button></div>
-</section>
+    </section>
 
-<section class="cart">
-  <h2>🛒 سلة المشتريات</h2>
-  <div class="cart-items" id="cartItems"></div>
-  <p><strong>الإجمالي:</strong> <span id="total">0</span> SDG</p>
-</section>
+    <!-- قائمة الأسعار -->
+    <section class="card">
+      <h2>قائمة أسعار فري فاير</h2>
+      <div class="product">110 💎 - 3600 SDG / 55 EGP <button onclick="addToCart('110 جوهرة',3600,55)">إضافة</button></div>
+      <div class="product">210 💎 - 7500 SDG / 115 EGP <button onclick="addToCart('210 جوهرة',7500,115)">إضافة</button></div>
+      <div class="product">583 💎 - 18000 SDG / 280 EGP <button onclick="addToCart('583 جوهرة',18000,280)">إضافة</button></div>
+      <div class="product">1180 💎 - 35500 SDG / 550 EGP <button onclick="addToCart('1180 جوهرة',35500,550)">إضافة</button></div>
+      <div class="product">2420 💎 - 70500 SDG / 1100 EGP <button onclick="addToCart('2420 جوهرة',70500,1100)">إضافة</button></div>
+      <div class="product">ترقية المستوى 🔥 - 18000 SDG / 285 EGP <button onclick="addToCart('ترقية المستوى',18000,285)">إضافة</button></div>
+      <div class="product">عضوية أسبوعية 📅 - 9000 SDG / 140 EGP <button onclick="addToCart('عضوية أسبوعية',9000,140)">إضافة</button></div>
+      <div class="product">عضوية شهرية 📅 - 39000 SDG / 600 EGP <button onclick="addToCart('عضوية شهرية',39000,600)">إضافة</button></div>
+    </section>
 
-<section class="payment">
-  <h2>طرق الدفع</h2>
-  <ul>
-    <li>💳 بنكك – رقم الحساب: 1966784 – الاسم: خالد محمد موسى</li>
-    <li>📱 ماي كاشي – 400774522</li>
-    <li>📲 برافو كاش – 79560447</li>
-  </ul>
-</section>
+    <!-- سلة المشتريات -->
+    <section class="card">
+      <h2>🛒 سلة المشتريات</h2>
+      <div class="cart-items" id="cartItems"></div>
+      <p class="cart-total">الإجمالي: <span id="totalSDG">0</span> SDG / <span id="totalEGP">0</span> EGP</p>
+    </section>
 
-  </div>  <!-- زر واتساب --><a id="checkoutBtn" href="#" class="whatsapp-float">💬</a>
+    <!-- طرق الدفع -->
+    <section class="card">
+      <h2>طرق الدفع</h2>
+      <ul>
+        <li>💳 بنكك – رقم الحساب: 1966784 – الاسم: خالد محمد موسى</li>
+        <li>📱 ماي كاشي – 400774522</li>
+        <li>📲 برافو كاش – 79560447</li>
+        <li>📱 فودافون كاش – 01035179385</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- زر واتساب -->
+  <a id="checkoutBtn" href="#" class="whatsapp-float">💬</a>
 
   <script>
     let cart = [];
 
-    function addToCart(name, price) {
+    function addToCart(name, priceSDG, priceEGP) {
       const item = cart.find(i => i.name === name);
       if (item) {
         item.qty++;
       } else {
-        cart.push({name, price, qty: 1});
+        cart.push({name, priceSDG, priceEGP, qty:1});
       }
       updateCart();
     }
@@ -80,12 +173,16 @@
     function updateCart() {
       const cartItemsDiv = document.getElementById("cartItems");
       cartItemsDiv.innerHTML = "";
-      let total = 0;
+      let totalSDG = 0, totalEGP = 0;
+
       cart.forEach(item => {
-        total += item.price * item.qty;
-        cartItemsDiv.innerHTML += `<div>${item.name} × ${item.qty} = ${item.price * item.qty} SDG <button onclick="removeFromCart('${item.name}')">❌</button></div>`;
+        totalSDG += item.priceSDG * item.qty;
+        totalEGP += item.priceEGP * item.qty;
+        cartItemsDiv.innerHTML += `<div>${item.name} × ${item.qty} = ${item.priceSDG * item.qty} SDG / ${item.priceEGP * item.qty} EGP <button onclick="removeFromCart('${item.name}')">❌</button></div>`;
       });
-      document.getElementById("total").innerText = total;
+
+      document.getElementById("totalSDG").innerText = totalSDG;
+      document.getElementById("totalEGP").innerText = totalEGP;
       updateWhatsAppLink();
     }
 
@@ -97,13 +194,14 @@
         message += "السلة فارغة ❌";
       } else {
         cart.forEach(item => {
-          message += `- ${item.name} × ${item.qty} = ${item.price * item.qty} SDG\n`;
+          message += `- ${item.name} × ${item.qty} = ${item.priceSDG * item.qty} SDG / ${item.priceEGP * item.qty} EGP\n`;
         });
-        message += `\nالإجمالي: ${cart.reduce((sum, i) => sum + i.price * i.qty, 0)} SDG ✅`;
+        message += `\nالإجمالي: ${cart.reduce((sum, i) => sum + i.priceSDG * i.qty,0)} SDG / ${cart.reduce((sum,i)=>sum+i.priceEGP*i.qty,0)} EGP ✅`;
       }
 
       const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       document.getElementById("checkoutBtn").setAttribute("href", url);
     }
-  </script></body>
-      </html>
+  </script>
+</body>
+</html>
