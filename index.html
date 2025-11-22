@@ -1,283 +1,321 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sudan Store — حديث</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudan Store</title>
+
   <style>
-    :root{
-      --primary:#2f6fa6;--accent:#4b79a1;--muted:#6b7b86;--bg:#f4f6f8;--card:#fff;
-      --radius:12px; --glass: rgba(255,255,255,0.6);
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      direction: rtl;
+      background: #f4f6f8;
+      margin: 0;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'Segoe UI',Tahoma,system-ui;direction:rtl;background:var(--bg);color:#17202a}/* Topbar */
-.topbar{background:linear-gradient(90deg,var(--primary),#223447);color:white;padding:10px 18px;display:flex;justify-content:space-between;align-items:center}
-.topbar .brand{display:flex;align-items:center;gap:12px}
-.brand h1{margin:0;font-size:20px}
-.topbar .nav{display:flex;gap:8px}
-.topbar .nav a{color:rgba(255,255,255,0.95);text-decoration:none;padding:6px 10px;border-radius:8px;font-weight:600}
-.topbar .nav a:hover{background:rgba(255,255,255,0.06)}
 
-/* layout */
-.container{max-width:1100px;margin:20px auto;padding:0 16px}
-.grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    /* الهيدر */
+    header {
+      background: linear-gradient(90deg,#4b79a1,#283e51);
+      color: #fff;
+      padding: 25px;
+      text-align: center;
+    }
 
-/* cards */
-.card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 6px 18px rgba(23,32,42,0.06)}
+    header img {
+      width: 90px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+    }
 
-/* controls */
-.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-select,input[type=search]{padding:8px 10px;border-radius:8px;border:1px solid #e0e6ea}
-.search-wrap{flex:1}
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 700;
+    }
 
-/* products */
-.products-list{display:flex;flex-direction:column;gap:12px}
-.product{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:linear-gradient(180deg,#ffffff,#fbfdff);border:1px solid #eef3f6}
-.product .info{display:flex;align-items:center;gap:12px}
-.product img{width:62px;height:62px;border-radius:10px;object-fit:cover}
-.product .title{font-weight:700}
-.product .meta{color:var(--muted);font-size:13px}
-.product .actions{display:flex;align-items:center;gap:8px}
-.qty{width:60px;padding:6px;border-radius:8px;border:1px solid #e0e6ea;text-align:center}
-.btn{background:var(--primary);color:#fff;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-.btn.secondary{background:#fff;color:var(--primary);border:1px solid var(--primary)}
+    .top-menu {
+      background: #283e51;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 25px;
+      color: #fff;
+    }
 
-/* cart */
-.cart-list{display:flex;flex-direction:column;gap:8px}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:#fbfdff;border:1px solid #eef3f6}
-.total{margin-top:12px;font-weight:800;font-size:18px}
+    .top-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+    }
 
-/* payment select */
-.payment-select{width:100%;padding:10px;border-radius:8px;border:1px solid #e0e6ea}
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px 0;
+    }
 
-/* floating whatsapp */
-.whatsapp-btn{position:fixed;left:20px;bottom:20px;background:#25d366;color:#fff;padding:14px 18px;border-radius:50px;box-shadow:0 8px 26px rgba(37,211,102,0.18);text-decoration:none;font-weight:800}
+    /* بطاقة المنتج */
+    .product-card {
+      display: flex;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
 
-/* toast */
-.toast{position:fixed;top:18px;right:18px;background:#1f9dff;color:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 10px 30px rgba(31,157,255,0.12);display:none;z-index:9999}
+    .product-card img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+    }
 
-/* modal */
-.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:10000}
-.modal{background:white;padding:18px;border-radius:12px;max-width:480px;width:95%}
+    .product-info {
+      padding: 15px;
+      flex-grow: 1;
+    }
 
-/* responsive */
-@media(max-width:900px){.grid{grid-template-columns:1fr}.topbar .brand h1{font-size:18px}.product img{width:48px;height:48px}}
+    .product-info h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .product-info p {
+      margin: 8px 0;
+      color: #444;
+      font-size: 15px;
+    }
+
+    .product-info button {
+      background: #4b79a1;
+      color: #fff;
+      border: none;
+      padding: 7px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* السلة */
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin-top: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    #notify {
+      position: fixed;
+      top: 20px;
+      right: 50%;
+      transform: translateX(50%);
+      background: #25d366;
+      padding: 12px 20px;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 8px;
+      display: none;
+      z-index: 999;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    /* واتساب */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #25d366;
+      color: #fff;
+      padding: 15px 20px;
+      font-size: 22px;
+      border-radius: 50px;
+      text-decoration: none;
+    }
 
   </style>
 </head>
-<body>  <div class="topbar">
-    <div class="brand">
-      <img src="https://via.placeholder.com/36" alt="logo" style="border-radius:8px">
-      <h1>Sudan Store</h1>
-    </div>
-    <div class="nav">
-      <a href="#how">كيفية الشراء</a>
-      <a href="#support">خدمة العملاء</a>
-    </div>
-  </div>  <div class="container">
-    <div class="grid"><!-- main -->
-  <div>
-    <div class="card">
-      <div class="controls">
-        <div class="search-wrap"><input id="search" type="search" placeholder="ابحث عن منتج أو عدد جواهر" /></div>
-        <select id="filter">
-          <option value="all">الكل</option>
-          <option value="diamonds">جواهر</option>
-          <option value="upgrade">ترقية</option>
-          <option value="membership">عضوية</option>
-        </select>
-        <select id="currency">
-          <option value="SDG">SDG</option>
-          <option value="EGP">EGP</option>
-        </select>
-      </div>
-    </div>
 
-    <div id="products" class="products-list card" aria-live="polite">
-      <!-- المنتجات تُعرض هنا -->
-    </div>
+<body>
 
-    <div id="how" class="card">
-      <h3>📖 كيفية الشراء</h3>
-      <ol>
-        <li>اختر المنتج واضغط "إضافة" مع تحديد الكمية.</li>
-        <li>راجع سلة المشتريات على اليمين.</li>
-        <li>اختر طريقة الدفع ثم اضغط "مراجعة و إرسال".</li>
-        <li>ستظهر نافذة تأكيد، اضغط إرسال لفتح واتساب وجاري إرسال الرسالة تلقائياً.</li>
-        <li>بعد الدفع أرسل تأكيد الدفع عبر نفس الواتساب.</li>
-      </ol>
-    </div>
+  <!-- القائمة العلوية -->
+  <div class="top-menu">
+    <a href="#" onclick="openHowToBuy()">كيفية الشراء</a>
+    <a href="https://wa.me/201035179385" target="_blank">خدمة العملاء</a>
   </div>
 
-  <!-- sidebar -->
-  <aside>
-    <div class="card">
-      <h3>🛒 سلة المشتريات</h3>
-      <div id="cart" class="cart-list"></div>
-      <div class="total">الإجمالي: <span id="totalValue">0</span> <span id="currencyLabel">SDG</span></div>
+  <!-- الإشعار -->
+  <div id="notify">تمت الإضافة للسلة ✔️</div>
 
-      <div style="margin-top:12px">
-        <label>اختر طريقة الدفع</label>
-        <select id="payment" class="payment-select">
-          <option value="بنكك">💳 بنكك</option>
-          <option value="ماي كاش">📱 ماي كاش</option>
-          <option value="برافو كاش">📲 برافو كاش</option>
-          <option value="فودافون كاش">📱 فودافون كاش</option>
-        </select>
+  <!-- الهيدر + لوجو -->
+  <header>
+    <img src="https://i.imgur.com/ZW7R5aF.png" alt="logo">
+    <h1>Sudan Store</h1>
+    <p>🎮 شحن ألعاب – SDG / EGP</p>
+  </header>
+
+  <div class="container">
+
+    <!-- المنتجات بنفس الأسعار -->
+    <section>
+
+      <div class="product-card">
+        <img src="https://i.imgur.com/0ZP4zZC.jpeg">
+        <div class="product-info">
+          <h3>110 💎</h3>
+          <p>3600 SDG / 55 EGP</p>
+          <button onclick="addToCart('110 جوهرة',3600,55)">إضافة للسلة</button>
+        </div>
       </div>
 
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button id="reviewBtn" class="btn">مراجعة وإرسال</button>
-        <button id="clearBtn" class="btn secondary">تفريغ السلة</button>
+      <div class="product-card">
+        <img src="https://i.imgur.com/HmGD2zE.jpeg">
+        <div class="product-info">
+          <h3>231 💎</h3>
+          <p>7500 SDG / 115 EGP</p>
+          <button onclick="addToCart('231 جوهرة',7500,115)">إضافة للسلة</button>
+        </div>
       </div>
-    </div>
 
-    <div id="support" class="card">
-      <h3>طرق الدفع وخدمة العملاء</h3>
-      <ul style="padding-left:0;list-style:none;margin:0">
-        <li>💳 بنك: 1966784 – خالد محمد موسى</li>
-        <li>📱 ماي كاشي: 400774522</li>
-        <li>📲 برافو كاش: 79560447</li>
-        <li>📱 فودافون كاش: 01035179385</li>
-      </ul>
-      <p style="margin-top:8px;color:var(--muted)">تواصل عبر الواتساب لخدمة العملاء</p>
-    </div>
-  </aside>
+      <div class="product-card">
+        <img src="https://i.imgur.com/xotfOZx.jpeg">
+        <div class="product-info">
+          <h3>583 💎</h3>
+          <p>18000 SDG / 280 EGP</p>
+          <button onclick="addToCart('583 جوهرة',18000,280)">إضافة للسلة</button>
+        </div>
+      </div>
 
-</div>
+      <div class="product-card">
+        <img src="https://i.imgur.com/Jc8cTg5.jpeg">
+        <div class="product-info">
+          <h3>1180 💎</h3>
+          <p>35500 SDG / 550 EGP</p>
+          <button onclick="addToCart('1180 جوهرة',35500,550)">إضافة للسلة</button>
+        </div>
+      </div>
 
-  </div>  <!-- toast -->  <div id="toast" class="toast"></div>  <!-- modal -->  <div id="modalBack" class="modal-backdrop"><div class="modal" role="dialog" aria-modal="true">
-    <h3>تأكيد الطلب</h3>
-    <div id="modalContent" style="margin-top:8px"></div>
-    <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-      <button id="sendWhats" class="btn">إرسال عبر واتساب</button>
-      <button id="closeModal" class="btn secondary">إلغاء</button>
-    </div>
-  </div></div><a id="whatsappFloat" href="#" class="whatsapp-btn">💬</a>
+      <div class="product-card">
+        <img src="https://i.imgur.com/0b7Lj2N.jpeg">
+        <div class="product-info">
+          <h3>2420 💎</h3>
+          <p>70500 SDG / 1100 EGP</p>
+          <button onclick="addToCart('2420 جوهرة',70500,1100)">إضافة للسلة</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.imgur.com/zLG0vTy.jpeg">
+        <div class="product-info">
+          <h3>ترقية المستوى</h3>
+          <p>18000 SDG / 285 EGP</p>
+          <button onclick="addToCart('ترقية المستوى',18000,285)">إضافة للسلة</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.imgur.com/H5rnkUd.jpeg">
+        <div class="product-info">
+          <h3>عضوية أسبوعية</h3>
+          <p>9200 SDG / 140 EGP</p>
+          <button onclick="addToCart('عضوية أسبوعية',9200,140)">إضافة للسلة</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.imgur.com/aJcOAF3.jpeg">
+        <div class="product-info">
+          <h3>عضوية شهرية</h3>
+          <p>40000 SDG / 600 EGP</p>
+          <button onclick="addToCart('عضوية شهرية',40000,600)">إضافة للسلة</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- السلة -->
+    <section class="card">
+      <h2>🛒 سلة المشتريات</h2>
+      <div id="cartItems"></div>
+
+      <p>الإجمالي: <span id="totalSDG">0</span> SDG / <span id="totalEGP">0</span> EGP</p>
+
+      <label>اختر طريقة الدفع:</label>
+      <select id="paymentMethod">
+        <option value="بنكك">بنكك</option>
+        <option value="ماي كاش">ماي كاش</option>
+        <option value="برافو كاش">برافو كاش</option>
+        <option value="فودافون كاش">فودافون كاش</option>
+      </select>
+    </section>
+  </div>
+
+  <a id="checkoutBtn" href="#" class="whatsapp-float">💬</a>
 
 <script>
-// بيانات المنتجات — الأسعار كما طلبت (لم تتغير)
-const products = [
-  {id:1,name:'110 جوهرة',type:'diamonds',priceSDG:3600,priceEGP:55,img:'https://via.placeholder.com/80'},
-  {id:2,name:'231 جوهرة',type:'diamonds',priceSDG:7500,priceEGP:115,img:'https://via.placeholder.com/80'},
-  {id:3,name:'583 جوهرة',type:'diamonds',priceSDG:18000,priceEGP:280,img:'https://via.placeholder.com/80'},
-  {id:4,name:'1180 جوهرة',type:'diamonds',priceSDG:35500,priceEGP:550,img:'https://via.placeholder.com/80'},
-  {id:5,name:'2420 جوهرة',type:'diamonds',priceSDG:70500,priceEGP:1100,img:'https://via.placeholder.com/80'},
-  {id:6,name:'ترقية المستوى',type:'upgrade',priceSDG:18000,priceEGP:285,img:'https://via.placeholder.com/80'},
-  {id:7,name:'عضوية أسبوعية',type:'membership',priceSDG:9200,priceEGP:140,img:'https://via.placeholder.com/80'},
-  {id:8,name:'عضوية شهرية',type:'membership',priceSDG:40000,priceEGP:600,img:'https://via.placeholder.com/80'},
-];
-
 let cart = [];
-let currency = 'SDG';
 
-const productsEl = document.getElementById('products');
-const cartEl = document.getElementById('cart');
-const totalValueEl = document.getElementById('totalValue');
-const currencyLabel = document.getElementById('currencyLabel');
-
-function showToast(text){
-  const t = document.getElementById('toast');
-  t.innerText = text; t.style.display='block';
-  setTimeout(()=>t.style.display='none',1500);
+function showNotify() {
+  let n = document.getElementById("notify");
+  n.style.display = "block";
+  setTimeout(() => n.style.display = "none", 1200);
 }
 
-function renderProducts(list=products){
-  productsEl.innerHTML='';
-  list.forEach(p=>{
-    const price = currency==='SDG'?p.priceSDG:p.priceEGP;
-    const node = document.createElement('div'); node.className='product';
-    node.innerHTML=`
-      <div class="info"><img src="${p.img}" alt=""><div>
-        <div class="title">${p.name}</div>
-        <div class="meta">${p.type} • ${p.priceSDG} SDG / ${p.priceEGP} EGP</div>
-      </div></div>
-      <div class="actions">
-        <input type="number" min="1" value="1" id="qty-${p.id}" class="qty" />
-        <button class="btn" onclick="addToCart(${p.id})">إضافة — ${price} ${currency}</button>
-      </div>
-    `;
-    productsEl.appendChild(node);
+function addToCart(name, priceSDG, priceEGP) {
+  const item = cart.find(i => i.name === name);
+  if (item) item.qty++;
+  else cart.push({name, priceSDG, priceEGP, qty:1});
+
+  showNotify();
+  updateCart();
+}
+
+function updateCart() {
+  const c = document.getElementById("cartItems");
+  c.innerHTML = "";
+
+  let totalSDG = 0, totalEGP = 0;
+
+  cart.forEach(item => {
+    totalSDG += item.priceSDG * item.qty;
+    totalEGP += item.priceEGP * item.qty;
+    c.innerHTML += `<div>${item.name} × ${item.qty}</div>`;
   });
+
+  document.getElementById("totalSDG").innerText = totalSDG;
+  document.getElementById("totalEGP").innerText = totalEGP;
+
+  updateWhatsApp();
 }
 
-function addToCart(id){
-  const p = products.find(x=>x.id===id);
-  const qty = parseInt(document.getElementById('qty-'+id).value)||1;
-  const item = cart.find(i=>i.id===id);
-  if(item) item.qty += qty; else cart.push({id:p.id,name:p.name,priceSDG:p.priceSDG,priceEGP:p.priceEGP,qty});
-  renderCart(); showToast('تمت الإضافة إلى السلة');
-}
+function updateWhatsApp() {
+  let payment = document.getElementById("paymentMethod").value;
 
-function removeItem(id){ cart = cart.filter(i=>i.id!==id); renderCart(); }
-
-function renderCart(){
-  cartEl.innerHTML='';
-  let total = 0;
-  cart.forEach(i=>{
-    const price = currency==='SDG'?i.priceSDG:i.priceEGP;
-    total += price * i.qty;
-    const div = document.createElement('div'); div.className='cart-item';
-    div.innerHTML = `<div>${i.name} × ${i.qty}</div><div>${price*i.qty} ${currency} <button class='btn secondary' onclick='removeItem(${i.id})'>حذف</button></div>`;
-    cartEl.appendChild(div);
+  let msg = "🛒 طلب جديد:\n\n";
+  cart.forEach(i => {
+    msg += `${i.name} × ${i.qty} = ${i.priceSDG * i.qty} SDG / ${i.priceEGP * i.qty} EGP\n`;
   });
-  totalValueEl.innerText = total; currencyLabel.innerText = currency;
+
+  msg += `\nطريقة الدفع: ${payment}`;
+  msg += `\nالإجمالي: ${document.getElementById("totalSDG").innerText} SDG / ${document.getElementById("totalEGP").innerText} EGP`;
+
+  const url = `https://wa.me/201035179385?text=${encodeURIComponent(msg)}`;
+  document.getElementById("checkoutBtn").href = url;
 }
 
-// controls
-document.getElementById('filter').addEventListener('change', e=>{
-  const v = e.target.value;
-  if(v==='all') renderProducts(); else renderProducts(products.filter(p=>p.type===v));
-});
+function openHowToBuy() {
+  alert("خطوات الشراء:\n1- اختر المنتج.\n2- اضفه للسلة.\n3- اختر طريقة الدفع.\n4- اضغط زر واتساب وأرسل الطلب.\n5- سيتم تنفيذ طلبك فورًا.");
+}
+</script>
 
-document.getElementById('currency').addEventListener('change', e=>{ currency = e.target.value; renderProducts(); renderCart(); });
-
-document.getElementById('search').addEventListener('input', e=>{
-  const q = e.target.value.trim();
-  if(!q) renderProducts(); else renderProducts(products.filter(p=>p.name.includes(q)||String(p.priceSDG).includes(q)||String(p.priceEGP).includes(q)));
-});
-
-// review & send
-const modalBack = document.getElementById('modalBack');
-const modalContent = document.getElementById('modalContent');
-const sendWhats = document.getElementById('sendWhats');
-const closeModal = document.getElementById('closeModal');
-
-document.getElementById('reviewBtn').addEventListener('click', ()=>{
-  if(cart.length===0){ showToast('السلة فارغة'); return; }
-  // build summary
-  let payment = document.getElementById('payment').value;
-  let text = `طريقة الدفع: ${payment}
-
-`;
-  cart.forEach(i=>{
-    const price = currency==='SDG'?i.priceSDG:i.priceEGP;
-    text += `- ${i.name} × ${i.qty} = ${price*i.qty} ${currency}
-`;
-  });
-  text += `
-الإجمالي: ${totalValueEl.innerText} ${currency}`;
-  modalContent.innerText = text;
-  modalBack.style.display='flex';
-});
-
-closeModal.addEventListener('click', ()=> modalBack.style.display='none');
-
-sendWhats.addEventListener('click', ()=>{
-  const phone = '201035179385';
-  const msg = encodeURIComponent(modalContent.innerText);
-  const url = `https://wa.me/${phone}?text=${msg}`;
-  window.open(url,'_blank');
-  modalBack.style.display='none';
-  showToast('تم فتح واتساب لإرسال الطلب');
-});
-
-// clear
-document.getElementById('clearBtn').addEventListener('click', ()=>{ cart=[]; renderCart(); showToast('تم تفريغ السلة'); });
-
-// float whatsapp
-document.getElementById('whatsappFloat').addEventListener('click', ()=> window.open('https://wa.me/201035179385','_blank'));
-
-// initial render
-renderProducts(); renderCart();
-</script></body>
-      </html>
+</body>
+          </html>
