@@ -2,127 +2,128 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sudan-Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-    body{margin:0;font-family:"Tajawal",sans-serif;background:#f4f4f4;}
+body{font-family:'Cairo',sans-serif;margin:0;background:#f7f7f7;}
+header{
+background:linear-gradient(90deg,#0b6e4f,#ffffff,#a60d1a);
+padding:22px;text-align:center;color:#fff;font-size:25px;font-weight:700;
+display:flex;justify-content:center;align-items:center;gap:10px;}
+.logo{background:#fff;color:#a60d1a;width:40px;height:40px;border-radius:10px;
+display:flex;justify-content:center;align-items:center;font-weight:900;}
+.container{padding:15px;}
+.card{
+background:#fff;border-radius:14px;padding:12px;margin-bottom:12px;
+display:flex;justify-content:space-between;align-items:center;border-right:7px solid #0b6e4f;}
+.diamond{font-size:30px;}
+.title{color:#a60d1a;font-weight:bold;font-size:20px;}
+.price{color:#444;font-size:14px;margin-top:3px;}
+.btn-add{
+background:#0b8b24;color:#fff;padding:10px 18px;border-radius:9px;
+border:0;font-size:17px;cursor:pointer;}
+.counter{width:45px;padding:5px;text-align:center;font-size:16px;border-radius:6px;border:1px solid #999;}
 
-    /* ▪ هيدر بألوان علم السودان ▪ */
-    header{
-        background: linear-gradient(to right,#00923F,#D21034,#000000);
-        padding:25px;
-        color:white;
-        text-align:center;
-        font-size:27px;
-        font-weight:700;
-        display:flex;
-        justify-content:center;
-        gap:10px;
-        align-items:center;
-    }
+.cart{
+background:#fff;padding:15px;border-radius:14px;margin:15px;
+border-left:6px solid #a60d1a;}
+.cart-title{font-size:20px;font-weight:700;margin-bottom:8px;}
+.pay-select{width:100%;padding:10px;border-radius:8px;font-size:16px;margin-top:10px;border:1px solid #888;}
 
-    /* ▪ لوجو عبارة عن شكل متجر ▪ */
-    .logo{
-        width:42px;height:42px;
-        background:white;border-radius:10px;
-        display:flex;justify-content:center;align-items:center;
-        color:#D21034;font-size:20px;font-weight:900;
-    }
-
-    .container{width:90%;margin:auto;margin-top:25px;}
-    
-    /* منتج */
-    .item{
-        background:white;
-        border-radius:14px;
-        padding:18px;
-        margin-bottom:12px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        border-right:6px solid #00923F;
-    }
-
-    .item span{display:block;font-size:15px;color:#555;}
-    .price{color:#D21034;font-size:21px;font-weight:700;}
-
-    /* زر اضافة */
-    button{
-        background:#00923F;color:white;border:none;
-        padding:9px 15px;border-radius:8px;font-size:15px;
-        cursor:pointer;font-weight:600;
-    }
-    button:hover{opacity:0.8;}
-
-    /* زر واتساب */
-    .whatsapp{
-        position:fixed;bottom:20px;left:20px;
-        background:#25D366;color:white;
-        padding:15px 19px;border-radius:50px;
-        font-size:17px;font-weight:700;
-        box-shadow:0 0 8px rgba(0,0,0,0.4);
-        text-decoration:none;
-    }
-
-    /* أيقونة الجوهرة */
-    .gem{
-        font-size:26px;margin-left:8px;color:#00923F;
-    }
+.whatsapp{
+position:fixed;bottom:18px;left:18px;background:#0cc243;
+padding:14px 22px;border-radius:50px;color:#fff;font-size:18px;
+box-shadow:0px 4px 8px rgba(0,0,0,.3);border:0;cursor:pointer;display:flex;gap:6px;align-items:center;}
 </style>
-</head>
 
+</head>
 <body>
 
 <header>
-    <div class="logo">S</div>  
-    Sudan-Store
+<span>Sudan-Store</span>
+<div class="logo">S</div>
 </header>
-
 
 <div class="container">
 
-    <div class="item">
-        <div>
-            <strong class="price">110 جوهرة</strong>
-            <span>SDG 3600 / EGP 55</span>
-        </div>
-        <div class="gem">💎</div>
-        <button>إضافة</button>
-    </div>
-
-    <div class="item">
-        <div>
-            <strong class="price">231 جوهرة</strong>
-            <span>SDG 7500 / EGP 115</span>
-        </div>
-        <div class="gem">💎</div>
-        <button>إضافة</button>
-    </div>
-
-    <div class="item">
-        <div>
-            <strong class="price">583 جوهرة</strong>
-            <span>SDG 18000 / EGP 280</span>
-        </div>
-        <div class="gem">💎</div>
-        <button>إضافة</button>
-    </div>
-
-    <div class="item">
-        <div>
-            <strong class="price">1180 جوهرة</strong>
-            <span>SDG 35500 / EGP 550</span>
-        </div>
-        <div class="gem">💎</div>
-        <button>إضافة</button>
-    </div>
+<!-- المنتجات -->
+<div id="products"></div>
 
 </div>
 
+<!-- السلة -->
+<div class="cart">
+<p class="cart-title">🛒 سلة المشتريات</p>
+<p id="total">الإجمالي: SDG 0 / EGP 0</p>
 
-<!-- زر التواصل بالواتساب برقمك الذي وضعته -->
-<a class="whatsapp" href="https://wa.me/201035179385" target="_blank">💬 تواصل عبر واتساب</a>
+<label>اختر طريقة الدفع:</label>
+<select class="pay-select" id="method">
+<option>بنكك</option>
+<option>ماي كاش</option>
+<option>برافو</option>
+<option>فودافون كاش</option>
+</select>
+</div>
+
+<button class="whatsapp" onclick="sendOrder()">
+💬 تواصل عبر واتساب
+</button>
+
+<script>
+let products=[
+{g:110,sdg:3600,egp:55},
+{g:231,sdg:7500,egp:115},
+{g:583,sdg:18000,egp:280},
+{g:1180,sdg:35500,egp:550}
+];
+
+let cart=[];
+
+function renderProducts(){
+let html="";
+products.forEach((p,i)=>{
+html+=`
+<div class="card">
+<div>
+<div class="title">${p.g} جوهرة</div>
+<div class="price">SDG ${p.sdg} / EGP ${p.egp}</div>
+</div>
+
+<div class="diamond">💎</div>
+
+<div>
+<button class="btn-add" onclick="addCart(${i})">إضافة</button>
+</div>
+</div>`;
+});
+document.getElementById("products").innerHTML=html;
+}
+renderProducts();
+
+function addCart(i){
+cart.push(products[i]);
+calc();
+}
+
+function calc(){
+let sdg=0,egp=0;
+cart.forEach(p=>{sdg+=p.sdg;egp+=p.egp;});
+document.getElementById("total").innerHTML=`الإجمالي: SDG ${sdg} / EGP ${egp}`;
+return{sdg,egp}
+}
+
+function sendOrder(){
+let t=calc();
+let pay=document.getElementById("method").value;
+let msg=`مرحباً أريد الطلب:\n`;
+cart.forEach(p=>msg+=`🔹 ${p.g} جوهرة - SDG ${p.sdg} / EGP ${p.egp}\n`);
+msg+=`\nالإجمالي: SDG ${t.sdg} / EGP ${t.egp}\n`;
+msg+=`طريقة الدفع: ${pay}`;
+
+window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
+}
+</script>
 
 </body>
 </html>
