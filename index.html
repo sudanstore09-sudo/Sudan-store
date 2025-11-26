@@ -11,8 +11,8 @@
     --bg: #f3f7fb;
     --card: #ffffff;
     --muted: #6b7b86;
-    --primary: #2f6fa6;
-    --accent: #4b79a1;
+    --primary: #006233; /* أخضر السودان */
+    --accent: #ce1126; /* أحمر السودان */
     --success: #25d366;
     --glass: rgba(255,255,255,0.6);
     --radius: 14px;
@@ -29,7 +29,7 @@
 
   /* Header */
   .header{
-    background: linear-gradient(90deg,var(--primary),#243b50);
+    background: linear-gradient(90deg,var(--primary),#fedd00,#ce1126); /* ألوان العلم */
     color: #fff;
     padding:20px 18px;
     display:flex;
@@ -43,7 +43,7 @@
   }
   .logo {
     width:58px; height:58px; border-radius:10px;
-    background: linear-gradient(135deg,#ff5fa3,#7a6bff);
+    background: linear-gradient(135deg,#006233,#ffffff,#ce1126,#000); /* علم السودان */
     display:flex; align-items:center; justify-content:center;
     box-shadow: 0 6px 16px rgba(0,0,0,0.12), inset 0 -6px 18px rgba(255,255,255,0.06);
   }
@@ -79,8 +79,11 @@
     padding:12px;border:1px solid #eef6fb; transition:transform .18s, box-shadow .18s;
   }
   .product:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(20,40,60,0.08)}
-  .product-top{display:flex;gap:12px;align-items:center}
-  .product img{width:86px;height:86px;border-radius:10px;object-fit:cover;flex-shrink:0}
+  .product-top{
+    display:flex;align-items:center;justify-content:center;
+    height:86px; border-radius:10px; background:linear-gradient(180deg,#f0f0f0,#e0e0e0);
+    font-weight:700; font-size:16px; color:var(--primary);
+  }
   .product-title{font-weight:800;font-size:16px;color:#163042}
   .product-sub{color:var(--muted);font-size:13px;margin-top:2px}
   .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
@@ -105,9 +108,8 @@
   .toast{position:fixed;top:18px;right:18px;background:var(--success);color:#fff;padding:10px 14px;border-radius:10px;display:none;z-index:9999;box-shadow:0 10px 30px rgba(37,211,102,0.12)}
   .footer{margin-top:28px;text-align:center;color:var(--muted);font-size:14px;padding:18px 0}
 
-  /* responsive tweaks */
   @media(max-width:760px){
-    .product img{width:72px;height:72px}
+    .product-top{height:72px}
     .header{flex-direction:column;align-items:flex-start;row-gap:12px}
   }
 </style>
@@ -118,17 +120,17 @@
   <header class="header" role="banner">
     <div class="brand" aria-hidden>
       <div class="logo" aria-hidden>
-        <!-- simple SVG logo: S + gem -->
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <rect x="0" y="0" width="64" height="64" rx="12" fill="url(#g1)"/>
+          <text x="32" y="42" font-size="18" font-weight="800" text-anchor="middle" fill="#fff">S</text>
           <defs>
             <linearGradient id="g1" x1="0" x2="1">
-              <stop offset="0" stop-color="#ff6aa3"/>
-              <stop offset="1" stop-color="#7a6bff"/>
+              <stop offset="0" stop-color="#006233"/>
+              <stop offset="0.33" stop-color="#ffffff"/>
+              <stop offset="0.66" stop-color="#ce1126"/>
+              <stop offset="1" stop-color="#000"/>
             </linearGradient>
           </defs>
-          <rect x="0" y="0" width="64" height="64" rx="12" fill="url(#g1)"/>
-          <path d="M20 44 L32 20 L44 44 Z" fill="rgba(255,255,255,0.95)"/>
-          <text x="32" y="50" font-size="10" font-weight="800" text-anchor="middle" fill="rgba(255,255,255,0.95)">S</text>
         </svg>
       </div>
       <div>
@@ -194,10 +196,7 @@
       <aside>
         <div class="sidebar-card" role="region" aria-label="سلة المشتريات">
           <h3 style="margin:0 0 8px 0">🛒 سلة المشتريات</h3>
-          <div id="cartList" class="cart-list" aria-live="polite">
-            <!-- عناصر السلة -->
-          </div>
-
+          <div id="cartList" class="cart-list" aria-live="polite"></div>
           <div class="cart-total" style="margin-top:8px">الإجمالي: <span id="totalAmount">0</span> <small id="currencyLabel">SDG</small></div>
 
           <label style="display:block;margin-top:12px;font-weight:700;color:var(--muted)">اختر طريقة الدفع</label>
@@ -236,7 +235,6 @@
 
   <!-- toast & modal -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
   <div id="modalBack" class="modal-back" role="dialog" aria-modal="true">
     <div class="modal" role="document">
       <h3 style="margin:0 0 8px 0">تأكيد الطلب</h3>
@@ -252,26 +250,19 @@
   <a id="quickWhats" class="btn-primary whatsapp" href="https://wa.me/201035179385" target="_blank" style="position:fixed;left:18px;bottom:18px;border-radius:50px;padding:12px 14px;z-index:9999;text-decoration:none;color:#fff">💬</a>
 
 <script>
-/* === بيانات المنتجات — لا تغير الأسعار هنا (كما طلبت) === */
 const PRODUCTS = [
-  {id:1, name:'110 جوهرة', type:'diamonds', priceSDG:3600, priceEGP:55, img:'https://i.imgur.com/0ZP4zZC.jpeg'},
-  {id:2, name:'231 جوهرة', type:'diamonds', priceSDG:7500, priceEGP:115, img:'https://i.imgur.com/HmGD2zE.jpeg'},
-  {id:3, name:'583 جوهرة', type:'diamonds', priceSDG:18000, priceEGP:280, img:'https://i.imgur.com/xotfOZx.jpeg'},
-  {id:4, name:'1180 جوهرة', type:'diamonds', priceSDG:35500, priceEGP:550, img:'https://i.imgur.com/Jc8cTg5.jpeg'},
-  {id:5, name:'2420 جوهرة', type:'diamonds', priceSDG:70500, priceEGP:1100, img:'https://i.imgur.com/0b7Lj2N.jpeg'},
-  {id:6, name:'ترقية المستوى', type:'upgrade', priceSDG:18000, priceEGP:285, img:'https://i.imgur.com/zLG0vTy.jpeg'},
-  {id:7, name:'عضوية أسبوعية', type:'membership', priceSDG:9200, priceEGP:140, img:'https://i.imgur.com/H5rnkUd.jpeg'},
-  {id:8, name:'عضوية شهرية', type:'membership', priceSDG:40000, priceEGP:600, img:'https://i.imgur.com/aJcOAF3.jpeg'},
+  {id:1, name:'110 جوهرة', type:'diamonds', priceSDG:3600, priceEGP:55},
+  {id:2, name:'231 جوهرة', type:'diamonds', priceSDG:7500, priceEGP:115},
+  {id:3, name:'583 جوهرة', type:'diamonds', priceSDG:18000, priceEGP:280},
+  {id:4, name:'1180 جوهرة', type:'diamonds', priceSDG:35500, priceEGP:550},
+  {id:5, name:'2420 جوهرة', type:'diamonds', priceSDG:70500, priceEGP:1100},
+  {id:6, name:'ترقية المستوى', type:'upgrade', priceSDG:18000, priceEGP:285},
+  {id:7, name:'عضوية أسبوعية', type:'membership', priceSDG:9200, priceEGP:140},
+  {id:8, name:'عضوية شهرية', type:'membership', priceSDG:40000, priceEGP:600},
 ];
 
-let state = {
-  currency: 'SDG',
-  filter: 'all',
-  query: '',
-  cart: []
-};
+let state = {currency:'SDG', filter:'all', query:'', cart:[]};
 
-/* عناصر DOM */
 const productsGrid = document.getElementById('productsGrid');
 const searchInput = document.getElementById('searchInput');
 const filterSelect = document.getElementById('filterSelect');
@@ -279,137 +270,4 @@ const currencySelect = document.getElementById('currencySelect');
 const cartList = document.getElementById('cartList');
 const totalAmount = document.getElementById('totalAmount');
 const currencyLabel = document.getElementById('currencyLabel');
-const paymentMethod = document.getElementById('paymentMethod');
-const toast = document.getElementById('toast');
-const modalBack = document.getElementById('modalBack');
-const modalBody = document.getElementById('modalBody');
-const sendBtn = document.getElementById('sendBtn');
-const closeBtn = document.getElementById('closeBtn');
-
-/* --- Helpers --- */
-function showToast(text, time=1500){
-  toast.innerText = text;
-  toast.style.display = 'block';
-  setTimeout(()=> toast.style.display = 'none', time);
-}
-
-function formatPrice(p, currency){
-  return currency === 'SDG' ? `${p} SDG` : `${p} EGP`;
-}
-
-/* --- Render products --- */
-function renderProducts(){
-  productsGrid.innerHTML = '';
-  const q = state.query.trim();
-  let list = PRODUCTS.filter(p => (state.filter === 'all' || p.type === state.filter));
-  if(q) {
-    const lower = q.toLowerCase();
-    list = list.filter(p => p.name.toLowerCase().includes(lower) || String(p.priceSDG).includes(q) || String(p.priceEGP).includes(q));
-  }
-  list.forEach(p => {
-    const price = state.currency === 'SDG' ? p.priceSDG : p.priceEGP;
-    const card = document.createElement('div'); card.className = 'product';
-    card.innerHTML = `
-      <div class="product-top">
-        <img src="${p.img}" alt="${p.name}" loading="lazy" />
-        <div>
-          <div class="product-title">${p.name}</div>
-          <div class="product-sub">${p.priceSDG} SDG / ${p.priceEGP} EGP</div>
-        </div>
-      </div>
-      <div class="product-bottom">
-        <div style="display:flex;gap:8px;align-items:center">
-          <input aria-label="الكمية" id="qty-${p.id}" class="qty" type="number" min="1" value="1">
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-          <div class="price">${price} ${state.currency}</div>
-          <button class="btn-add" data-id="${p.id}">إضافة</button>
-        </div>
-      </div>
-    `;
-    productsGrid.appendChild(card);
-  });
-  // attach handlers for add buttons
-  document.querySelectorAll('.btn-add').forEach(b => {
-    b.addEventListener('click', (e) => {
-      const id = Number(e.currentTarget.dataset.id);
-      const qtyEl = document.getElementById('qty-'+id);
-      const qty = Math.max(1, parseInt(qtyEl.value) || 1);
-      addToCart(id, qty);
-    });
-  });
-}
-
-/* --- Cart logic --- */
-function addToCart(productId, qty=1){
-  const p = PRODUCTS.find(x=>x.id===productId);
-  const existing = state.cart.find(i=>i.id===productId);
-  if(existing) existing.qty += qty; else state.cart.push({id:p.id, name:p.name, priceSDG:p.priceSDG, priceEGP:p.priceEGP, qty});
-  renderCart();
-  showToast('تمت الإضافة إلى السلة');
-}
-
-function removeFromCart(id){
-  state.cart = state.cart.filter(i => i.id !== id);
-  renderCart();
-}
-
-function renderCart(){
-  cartList.innerHTML = '';
-  let total = 0;
-  state.cart.forEach(item=>{
-    const price = state.currency === 'SDG' ? item.priceSDG : item.priceEGP;
-    total += price * item.qty;
-    const div = document.createElement('div'); div.className = 'cart-item';
-    div.innerHTML = `<div><strong>${item.name}</strong><br><small>${item.qty} × ${price} ${state.currency}</small></div><div><strong>${price*item.qty} ${state.currency}</strong><br><button class="btn-outline" data-remove="${item.id}">حذف</button></div>`;
-    cartList.appendChild(div);
-  });
-  document.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', e => {
-    const id = Number(e.currentTarget.dataset.remove);
-    removeFromCart(id);
-  }));
-  totalAmount.innerText = total;
-  currencyLabel.innerText = state.currency;
-}
-
-/* --- Controls events --- */
-searchInput.addEventListener('input', e => { state.query = e.target.value; renderProducts(); });
-filterSelect.addEventListener('change', e => { state.filter = e.target.value; renderProducts(); });
-currencySelect.addEventListener('change', e => { state.currency = e.target.value; renderProducts(); renderCart(); });
-
-document.getElementById('reviewBtn').addEventListener('click', ()=> {
-  if(state.cart.length === 0){ showToast('السلة فارغة'); return; }
-  // build message
-  let msg = `🛒 طلب جديد من Sudan-store\\n\\nطريقة الدفع: ${paymentMethod.value}\\n\\n`;
-  state.cart.forEach(i=>{
-    const price = state.currency === 'SDG' ? i.priceSDG : i.priceEGP;
-    msg += `- ${i.name} × ${i.qty} = ${price * i.qty} ${state.currency}\\n`;
-  });
-  msg += `\\nالإجمالي: ${totalAmount.innerText} ${state.currency}`;
-  modalBody.innerText = msg;
-  modalBack.style.display = 'flex';
-});
-
-closeBtn.addEventListener('click', ()=> modalBack.style.display = 'none');
-
-sendBtn.addEventListener('click', ()=> {
-  const phone = '201035179385';
-  const text = encodeURIComponent(modalBody.innerText);
-  window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
-  modalBack.style.display = 'none';
-  showToast('تم فتح واتساب لإرسال الطلب');
-});
-
-document.getElementById('clearBtn').addEventListener('click', ()=> {
-  state.cart = [];
-  renderCart();
-  showToast('تم تفريغ السلة');
-});
-
-/* init */
-renderProducts();
-renderCart();
-
-</script>
-</body>
-          </html>
+const paymentMethod = document.getElementById('paymentMethod
