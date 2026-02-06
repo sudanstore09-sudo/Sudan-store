@@ -1,140 +1,231 @@
-    opacity:.6;pointer-events:none;
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجر الجواهر</title>
+
+<style>
+:root{
+  --red:#d21034;
+  --white:#ffffff;
+  --black:#000000;
+  --green:#007a3d;
 }
 
-/* زر القائمة الجانبية */
+body{
+  margin:0;
+  font-family:Tahoma, Arial;
+  background:#f5f5f5;
+  direction:rtl;
+}
+
+header{
+  background:linear-gradient(90deg,var(--red),var(--white),var(--black),var(--green));
+  padding:20px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.container{
+  padding:20px;
+  max-width:900px;
+  margin:auto;
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+.icon{
+  font-size:40px;
+  text-align:center;
+}
+
+.currency{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.currency button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.currency .active{
+  background:var(--green);
+  color:#fff;
+}
+
+.product{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.price{
+  font-weight:bold;
+}
+
+select, textarea{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin-top:10px;
+}
+
+.buy{
+  background:var(--red);
+  color:#fff;
+  border:none;
+  padding:12px;
+  width:100%;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* زر جانبي */
 .side-btn{
-    position:fixed;left:15px;bottom:15px;
-    background:#000;color:#fff;
-    width:50px;height:50px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-size:24px;cursor:pointer;
+  position:fixed;
+  left:15px;
+  bottom:15px;
+  background:var(--black);
+  color:#fff;
+  padding:12px 15px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
 }
 
-/* النافذة */
-.side-panel{
-    position:fixed;top:0;left:-100%;
-    width:85%;height:100%;
-    background:#fff;z-index:999;
-    padding:20px;transition:.4s;
-    box-shadow:0 0 20px #0005;
+/* نافذة */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
 }
-.side-panel.open{left:0;}
-.side-panel h3{margin-top:0}
-.close{cursor:pointer;color:red;font-weight:bold}
+
+.modal-content{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  width:90%;
+  max-width:500px;
+  max-height:80%;
+  overflow:auto;
+}
+
+.close{
+  text-align:left;
+  cursor:pointer;
+  font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>Sudan-Store</h1>
-<div>شحن ألعاب — اختر العملة التي تناسبك</div>
-</header>
+<header>💎 متجر جواهر فري فاير</header>
 
-<div class="control-box">
-<select id="currency" onchange="changeCurrency()">
-<option value="SDG">💵 SDG</option>
-<option value="EGP">💰 EGP</option>
-</select>
-<input placeholder="ابحث (قريبًا)">
+<div class="container">
+
+<div class="card icon">🏪</div>
+
+<div class="card">
+  <div class="currency">
+    <button id="sdgBtn" class="active" onclick="setCurrency('sdg')">جنيه سوداني</button>
+    <button id="egpBtn" onclick="setCurrency('egp')">جنيه مصري</button>
+  </div>
 </div>
 
-<!-- المنتجات -->
-<div class="item">
-<span class="gem">110 جوهرة</span>
-<div class="price">
-<span class="sdg active">3600 SDG</span>
-<span class="egp">55 EGP</span>
-</div>
-<span class="add" onclick="addToCart('110 جوهرة',3600,55)">إضافة</span>
+<div class="card product">
+  <div>
+    <strong>العضوية الأسبوعية</strong>
+    <div class="price" data-sdg="8600" data-egp="120">8600 ج.س</div>
+  </div>
 </div>
 
-<div class="item">
-<span class="gem">231 جوهرة</span>
-<div class="price">
-<span class="sdg active">7500 SDG</span>
-<span class="egp">115 EGP</span>
-</div>
-<span class="add" onclick="addToCart('231 جوهرة',7500,115)">إضافة</span>
+<div class="card product">
+  <div>
+    <strong>العضوية الشهرية</strong>
+    <div class="price" data-sdg="40500" data-egp="530">40500 ج.س</div>
+  </div>
 </div>
 
-<div class="item">
-<span class="gem">⭐ العضوية الإسبوعية</span>
-<div class="price">
-<span class="sdg active">8600 SDG</span>
-<span class="egp">120 EGP</span>
-</div>
-<span class="add" onclick="addToCart('العضوية الإسبوعية',8600,120)">إضافة</span>
-</div>
+<div class="card">
+  <strong>طريقة الدفع</strong>
+  <select>
+    <option>بنكك</option>
+    <option>ماي كاشي</option>
+    <option>برافو</option>
+    <option>فوري</option>
+    <option>أوكاش</option>
+  </select>
 
-<div class="item">
-<span class="gem">🔥 العضوية الشهرية</span>
-<div class="price">
-<span class="sdg active">40500 SDG</span>
-<span class="egp">530 EGP</span>
-</div>
-<span class="add" onclick="addToCart('العضوية الشهرية',40500,530)">إضافة</span>
+  <textarea placeholder="ملاحظات الطلب (اختياري)"></textarea>
+
+  <button class="buy">إتمام الشراء</button>
 </div>
 
-<!-- السلة -->
-<div class="cart-box">
-<div class="cart-title">🛍 سلة المشتريات</div>
-<div id="cart-content">لا توجد عناصر</div>
-<div id="cart-total" class="cart-total">0</div>
-
-<select class="cart-input" id="payMethod">
-<option>بنكك</option>
-<option>ماي كاشي</option>
-<option>برافو</option>
-<option>فوري</option>
-<option>أوكاش</option>
-</select>
-
-<input class="cart-input" id="playerID" placeholder="ID اللاعب">
-<textarea class="cart-input" id="notes" placeholder="ملاحظات إضافية"></textarea>
-
-<a id="sendW" class="whatsapp-btn">إرسال الطلب</a>
 </div>
 
-<!-- زر جانبي -->
-<div class="side-btn" onclick="togglePanel()">☰</div>
+<div class="side-btn" onclick="openModal()">☰</div>
 
-<div class="side-panel" id="panel">
-<div class="close" onclick="togglePanel()">✖ إغلاق</div>
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="close" onclick="closeModal()">✖</div>
 
-<h3>كيفية الشراء</h3>
-<p>اختر الباقة ➜ أضف للسلة ➜ أدخل البيانات ➜ أرسل الطلب.</p>
+    <h3>📦 كيفية الشراء</h3>
+    <p>اختر العضوية، حدّد العملة، اختر وسيلة الدفع، ثم اضغط إتمام الشراء.</p>
 
-<h3>سياسة الاسترجاع</h3>
-<p>لا يمكن الاسترجاع بعد تنفيذ الشحن، في حال الخطأ تواصل معنا فورًا.</p>
+    <h3>🔄 سياسة الاسترجاع</h3>
+    <p>لا يمكن استرجاع المبلغ بعد تنفيذ الطلب إلا في حال وجود خطأ تقني من المتجر.</p>
 
-<h3>خدمة العملاء</h3>
-<p>واتساب: +201035179385</p>
+    <h3>📞 خدمة العملاء</h3>
+    <p>الدعم متوفر يوميًا عبر واتساب خلال ساعات العمل.</p>
+  </div>
 </div>
 
 <script>
-let cart=[];
-function addToCart(name,sdg,egp){
-cart.push({name,sdg,egp});
-updateCart();
+let currency='sdg';
+
+function setCurrency(cur){
+  currency=cur;
+  document.querySelectorAll('.price').forEach(p=>{
+    p.textContent=cur==='sdg'
+      ? p.dataset.sdg+' ج.س'
+      : p.dataset.egp+' ج.م';
+  });
+
+  sdgBtn.classList.toggle('active',cur==='sdg');
+  egpBtn.classList.toggle('active',cur==='egp');
 }
 
-function updateCart(){
-let list="",sdg=0,egp=0;
-cart.forEach(c=>{
-list+=`• ${c.name}<br>`;
-sdg+=c.sdg;egp+=c.egp;
-});
-document.getElementById("cart-content").innerHTML=list;
-let cur=document.getElementById("currency").value;
-document.getElementById("cart-total").innerText=
-cur=="SDG"?`الإجمالي: ${sdg} SDG`:`الإجمالي: ${egp} EGP`;
+function openModal(){
+  document.getElementById('modal').style.display='flex';
+}
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
+</script>
 
-let btn=document.getElementById("sendW");
-if(cart.length>0){
-btn.style.opacity=1;btn.style.pointerEvents="auto";
-let msg=`طلب جديد:\n${list.replace(/<br>/g,"\n")}
-\nالدفع: ${payMethod.value}
-\nID: ${playerID.value}
-\nملاحظات: ${notes.value}
-\n
+</body>
+    </html>
