@@ -2,120 +2,127 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>متجر توب اب السودان</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudan-Store</title>
+
 <style>
-    body{
-        margin:0;
-        background:#ffffff;
-        font-family:"Tajawal",sans-serif;
-    }
+    body{margin:0;font-family:"Tajawal",sans-serif;background:#f4f4f4;}
 
+    /* ▪ هيدر بألوان علم السودان ▪ */
     header{
-        background:#000; color:#fff;
-        padding:15px; text-align:center;
-        font-size:25px; font-weight:700;
-        border-bottom:5px solid #E32121;  /* أحمر */
-    }
-
-    .logo{
-        width:70px; height:70px;
-        margin:auto; margin-top:10px;
-        border-radius:10px;
-        background:#2AAA48;     /* أخضر */
+        background: linear-gradient(to right,#00923F,#D21034,#000000);
+        padding:25px;
+        color:white;
+        text-align:center;
+        font-size:27px;
+        font-weight:700;
         display:flex;
         justify-content:center;
+        gap:10px;
         align-items:center;
-        font-size:28px;
-        font-weight:900;
-        color:white;
     }
 
-    nav{
-        display:flex; gap:10px;
-        justify-content:center;
-        background:#E32121;
-        padding:10px;
+    /* ▪ لوجو عبارة عن شكل متجر ▪ */
+    .logo{
+        width:42px;height:42px;
+        background:white;border-radius:10px;
+        display:flex;justify-content:center;align-items:center;
+        color:#D21034;font-size:20px;font-weight:900;
     }
 
-    nav a{
-        color:white; font-size:17px;
+    .container{width:90%;margin:auto;margin-top:25px;}
+    
+    /* منتج */
+    .item{
+        background:white;
+        border-radius:14px;
+        padding:18px;
+        margin-bottom:12px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        border-right:6px solid #00923F;
+    }
+
+    .item span{display:block;font-size:15px;color:#555;}
+    .price{color:#D21034;font-size:21px;font-weight:700;}
+
+    /* زر اضافة */
+    button{
+        background:#00923F;color:white;border:none;
+        padding:9px 15px;border-radius:8px;font-size:15px;
+        cursor:pointer;font-weight:600;
+    }
+    button:hover{opacity:0.8;}
+
+    /* زر واتساب */
+    .whatsapp{
+        position:fixed;bottom:20px;left:20px;
+        background:#25D366;color:white;
+        padding:15px 19px;border-radius:50px;
+        font-size:17px;font-weight:700;
+        box-shadow:0 0 8px rgba(0,0,0,0.4);
         text-decoration:none;
-        font-weight:600;
     }
 
-    .container{padding:20px;}
-
-    .package{
-        background:#F7F7F7;
-        padding:15px;
-        border-right:6px solid #2AAA48;
-        border-radius:9px;
-        margin-bottom:15px;
+    /* أيقونة الجوهرة */
+    .gem{
+        font-size:26px;margin-left:8px;color:#00923F;
     }
-
-    .title{
-        font-size:22px; font-weight:700;
-        color:#000;
-    }
-
-    .price{
-        font-size:19px; font-weight:700;
-        color:#E32121;
-    }
-
-    footer{
-        background:#000; color:white;
-        padding:20px; text-align:center;
-        margin-top:30px;
-        border-top:5px solid #2AAA48;
-    }
-
 </style>
 </head>
+
 <body>
 
-<header>⭐ متجر شحن السودان ⭐</header>
+<header>
+    <div class="logo">S</div>  
+    Sudan-Store
+</header>
 
-<div class="logo">S</div>
-
-<nav>
-    <a href="#">الرئيسية</a>
-    <a href="#">الباقات</a>
-    <a href="#">التواصل</a>
-    <a href="#">الدفع</a>
-</nav>
 
 <div class="container">
-    <h2 style="color:#E32121;">🔥 الباقات المتاحة – جواهر فري فاير</h2>
 
-    <div class="package">
-        <p class="title">💎 100 جوهرة</p>
-        <p class="price">السعر: —</p>
+    <div class="item">
+        <div>
+            <strong class="price">110 جوهرة</strong>
+            <span>SDG 3600 / EGP 55</span>
+        </div>
+        <div class="gem">💎</div>
+        <button>إضافة</button>
     </div>
 
-    <div class="package">
-        <p class="title">💎 210 جوهرة</p>
-        <p class="price">السعر: —</p>
+    <div class="item">
+        <div>
+            <strong class="price">231 جوهرة</strong>
+            <span>SDG 7500 / EGP 115</span>
+        </div>
+        <div class="gem">💎</div>
+        <button>إضافة</button>
     </div>
 
-    <div class="package">
-        <p class="title">💎 530 جوهرة</p>
-        <p class="price">السعر: —</p>
+    <div class="item">
+        <div>
+            <strong class="price">583 جوهرة</strong>
+            <span>SDG 18000 / EGP 280</span>
+        </div>
+        <div class="gem">💎</div>
+        <button>إضافة</button>
     </div>
 
-    <div class="package">
-        <p class="title">💎 Membership شهر</p>
-        <p class="price">السعر: —</p>
+    <div class="item">
+        <div>
+            <strong class="price">1180 جوهرة</strong>
+            <span>SDG 35500 / EGP 550</span>
+        </div>
+        <div class="gem">💎</div>
+        <button>إضافة</button>
     </div>
 
-    <br>
-    <h2 style="color:#2AAA48;">📞 للتواصل والشراء</h2>
-    <p style="font-size:20px;">واتساب: <b>+201035179385</b></p>
 </div>
 
-<footer>
-    © جميع الحقوق محفوظة – متجر السودان 2025
-</footer>
+
+<!-- زر التواصل بالواتساب برقمك الذي وضعته -->
+<a class="whatsapp" href="https://wa.me/201035179385" target="_blank">💬 تواصل عبر واتساب</a>
 
 </body>
 </html>
