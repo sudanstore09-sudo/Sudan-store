@@ -27,20 +27,40 @@ header h1::before{content:"🛒 ";}
 .control-box{
     width:90%;
     margin:15px auto;
-    background:#fff;
-    padding:12px;
-    border-radius:14px;
-    box-shadow:0 0 10px #0002;
     display:flex;
     gap:10px;
     flex-wrap:wrap;
 }
-.control-box select,input{
+.control-box select,input, .menu-btn{
     flex:1;
     border-radius:10px;
     padding:9px;
     border:1px solid #ddd;
     font-size:15px;
+}
+.menu-btn{
+    background:#4b79a1;
+    color:white;
+    border:none;
+    cursor:pointer;
+    padding:9px;
+    font-weight:bold;
+}
+.menu-btn:hover{background:#2f5c85;}
+
+/* Toast */
+#toast{
+    position: fixed;
+    top:20px;
+    right:50%;
+    transform: translateX(50%);
+    background:#25D366;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:bold;
+    display:none;
+    z-index:999;
 }
 
 /* المنتجات */
@@ -66,21 +86,6 @@ header h1::before{content:"🛒 ";}
     transition: background 0.3s;
 }
 .add:hover{background:#000;}
-
-/* Toast */
-#toast{
-    position: fixed;
-    top:20px;
-    right:50%;
-    transform: translateX(50%);
-    background:#25D366;
-    color:#fff;
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:bold;
-    display:none;
-    z-index:999;
-}
 
 /* السلة */
 .cart-box{
@@ -133,7 +138,6 @@ header h1::before{content:"🛒 ";}
 #sidebar textarea{width:100%;height:70px;padding:10px;border-radius:10px;border:1px solid #ccc;}
 #sidebar-close{cursor:pointer;color:#000;font-weight:bold;margin-bottom:20px;display:inline-block;}
 #sidebar a{color:#4b79a1;text-decoration:none;display:block;margin:6px 0;}
-
 </style>
 </head>
 <body>
@@ -149,7 +153,7 @@ header h1::before{content:"🛒 ";}
 <option value="EGP">💰 EGP</option>
 </select>
 <input id="search" placeholder="ابحث عن باقة مثال: 110">
-<button onclick="openSidebar()" style="background:#4b79a1;color:white;padding:7px 15px;border-radius:10px;border:none;cursor:pointer;">☰ قائمة</button>
+<button class="menu-btn" onclick="openSidebar()">☰ القائمة</button>
 </div>
 
 <!-- Toast -->
@@ -219,20 +223,14 @@ function addToCart(name,sdg,egp){
     showToast();
     updateCart();
 }
-
 function showToast(){
-    const t = document.getElementById("toast");
+    const t=document.getElementById("toast");
     t.style.display="block";
     setTimeout(()=>t.style.display="none",1200);
 }
-
 function updateCart(){
     let list="",sdg=0,egp=0;
-    cart.forEach(c=>{
-        list+=`• ${c.name}<br>`;
-        sdg+=c.sdg;
-        egp+=c.egp;
-    });
+    cart.forEach(c=>{list+=`• ${c.name}<br>`;sdg+=c.sdg;egp+=c.egp;});
     document.getElementById("cart-content").innerHTML=list||"لا توجد عناصر";
     document.getElementById("cart-total").innerHTML=`الإجمالي: ${sdg} SDG / ${egp} EGP`;
 
@@ -242,11 +240,7 @@ function updateCart(){
     const msg=`طلب جديد من Sudan-Store:%0Aالباقات:%0A${list.replace(/<br>/g,"%0A")}%0Aالدفع: ${method}%0AID اللاعب: ${ID}%0Aملاحظات: ${notes}%0Aالإجمالي: ${sdg} SDG / ${egp} EGP`;
     document.getElementById("sendW").href=`https://wa.me/201035179385?text=${msg}`;
 }
-
-function scrollToCart(){
-    document.getElementById("cart").scrollIntoView({behavior:"smooth"});
-}
-
+function scrollToCart(){document.getElementById("cart").scrollIntoView({behavior:"smooth"});}
 function openSidebar(){document.getElementById("sidebar").classList.add("open");}
 function closeSidebar(){document.getElementById("sidebar").classList.remove("open");}
 
@@ -263,4 +257,4 @@ document.getElementById("currency").addEventListener("change",function(){
 </script>
 
 </body>
-                                                                                    </html>
+    </html>
