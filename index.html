@@ -117,6 +117,29 @@ font-weight:bold;
 color:#0f7c2e;
 margin-top:10px;
 }
+
+.cart input, .cart select{
+width:100%;
+padding:10px;
+margin:6px 0;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+.whatsapp-btn{
+width:100%;
+background:#25D366;
+color:white;
+padding:12px;
+font-size:18px;
+font-weight:bold;
+border-radius:12px;
+margin-top:10px;
+text-align:center;
+display:block;
+text-decoration:none;
+}
 </style>
 </head>
 
@@ -153,8 +176,32 @@ margin-top:10px;
 
 <div class="product">
 <div class="product-info">
+<h3>💎 583 جوهرة</h3>
+<div class="price" id="p3">18000 SDG</div>
+</div>
+<button class="add-btn" onclick="addToCart('583 جوهرة',18000,280)">إضافة</button>
+</div>
+
+<div class="product">
+<div class="product-info">
+<h3>💎 1180 جوهرة</h3>
+<div class="price" id="p4">35500 SDG</div>
+</div>
+<button class="add-btn" onclick="addToCart('1180 جوهرة',35500,550)">إضافة</button>
+</div>
+
+<div class="product">
+<div class="product-info">
+<h3>💎 2420 جوهرة</h3>
+<div class="price" id="p5">70500 SDG</div>
+</div>
+<button class="add-btn" onclick="addToCart('2420 جوهرة',70500,1100)">إضافة</button>
+</div>
+
+<div class="product">
+<div class="product-info">
 <h3>⭐ العضوية الأسبوعية</h3>
-<div class="price" id="p3">8600 SDG</div>
+<div class="price" id="p6">8600 SDG</div>
 </div>
 <button class="add-btn" onclick="addToCart('العضوية الأسبوعية',8600,120)">إضافة</button>
 </div>
@@ -162,7 +209,7 @@ margin-top:10px;
 <div class="product">
 <div class="product-info">
 <h3>🔥 العضوية الشهرية</h3>
-<div class="price" id="p4">40500 SDG</div>
+<div class="price" id="p7">40500 SDG</div>
 </div>
 <button class="add-btn" onclick="addToCart('العضوية الشهرية',40500,530)">إضافة</button>
 </div>
@@ -172,6 +219,18 @@ margin-top:10px;
 <h3>🛍 سلة المشتريات</h3>
 <div id="cartItems">لا توجد عناصر</div>
 <div class="total" id="total">الإجمالي: 0 SDG</div>
+
+<select id="payMethod">
+<option>بنكك</option>
+<option>ماي كاشي</option>
+<option>برافو</option>
+<option>فوري</option>
+<option>أوكاش</option>
+</select>
+
+<input id="notes" placeholder="ملاحظات (اختياري)">
+
+<a id="sendW" class="whatsapp-btn" href="#">إرسال الطلب للواتساب 📩</a>
 </div>
 
 </div>
@@ -187,8 +246,11 @@ egpBtn.classList.toggle("active",c==="EGP");
 
 document.getElementById("p1").textContent=c==="SDG"?"3600 SDG":"55 EGP";
 document.getElementById("p2").textContent=c==="SDG"?"7500 SDG":"115 EGP";
-document.getElementById("p3").textContent=c==="SDG"?"8600 SDG":"120 EGP";
-document.getElementById("p4").textContent=c==="SDG"?"40500 SDG":"530 EGP";
+document.getElementById("p3").textContent=c==="SDG"?"18000 SDG":"280 EGP";
+document.getElementById("p4").textContent=c==="SDG"?"35500 SDG":"550 EGP";
+document.getElementById("p5").textContent=c==="SDG"?"70500 SDG":"1100 EGP";
+document.getElementById("p6").textContent=c==="SDG"?"8600 SDG":"120 EGP";
+document.getElementById("p7").textContent=c==="SDG"?"40500 SDG":"530 EGP";
 
 renderCart();
 }
@@ -210,8 +272,14 @@ total+=item.price;
 
 document.getElementById("cartItems").innerHTML=list||"لا توجد عناصر";
 document.getElementById("total").textContent=`الإجمالي: ${total} ${currency}`;
+
+// توليد رابط واتساب
+let method=document.getElementById("payMethod").value;
+let notes=document.getElementById("notes").value || "لا توجد ملاحظات";
+let msg=`طلب جديد من Sudan-Store:%0Aالباقات:%0A${list.replace(/<br>/g,"%0A")}%0Aطريقة الدفع: ${method}%0Aملاحظات: ${notes}%0Aالإجمالي: ${total} ${currency}`;
+document.getElementById("sendW").href=`https://wa.me/201234567890?text=${msg}`;
 }
 </script>
 
 </body>
-</html>
+  </html>
