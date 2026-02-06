@@ -3,167 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>متجر جواهر فري فاير</title>
 
 <style>
-:root{
- --red:#c8102e;
- --green:#007a3d;
- --black:#000;
- --bg:#f4f4f4;
-}
-
 body{
- margin:0;
- font-family:Tahoma;
- direction:rtl;
- background:var(--bg);
+margin:0;
+font-family:Tajawal, Tahoma;
+direction:rtl;
+background:#f3f4f6;
 }
 
-/* ===== HEADER ===== */
 header{
- background:linear-gradient(90deg,var(--red),#fff,var(--black),var(--green));
- padding:20px;
- text-align:center;
+background:#111827;
+color:#fff;
+text-align:center;
+padding:20px;
+font-size:22px;
+font-weight:bold;
 }
 
-header h1{
- margin:0;
- color:#fff;
- font-size:24px;
- text-shadow:0 2px 5px rgba(0,0,0,.7);
-}
-
-/* ===== CONTAINER ===== */
 .container{
- max-width:900px;
- margin:auto;
- padding:15px;
+max-width:900px;
+margin:auto;
+padding:15px;
 }
 
 .card{
- background:#fff;
- border-radius:12px;
- padding:15px;
- margin-bottom:15px;
- box-shadow:0 4px 10px rgba(0,0,0,.1);
+background:#fff;
+padding:15px;
+margin-bottom:15px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
-/* ===== CURRENCY ===== */
 .currency{
- display:flex;
- gap:10px;
+display:flex;
+gap:10px;
 }
 
 .currency button{
- flex:1;
- padding:12px;
- border:none;
- border-radius:8px;
- font-weight:bold;
- cursor:pointer;
+flex:1;
+padding:12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+background:#e5e7eb;
 }
 
-.active{
- background:var(--green);
- color:#fff;
+.currency .active{
+background:#16a34a;
+color:#fff;
 }
 
-/* ===== PRODUCTS ===== */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
 .product{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:10px;
+background:#fff;
+padding:15px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.product h3{
+margin:5px 0;
+}
+
+.price{
+font-size:18px;
+font-weight:bold;
+margin:10px 0;
 }
 
 .product button{
- background:var(--red);
- color:#fff;
- border:none;
- padding:8px 12px;
- border-radius:8px;
- cursor:pointer;
+background:#dc2626;
+color:#fff;
+border:none;
+padding:10px;
+width:100%;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
 }
 
-/* ===== CART ===== */
 #cartBtn{
- position:fixed;
- left:15px;
- bottom:15px;
- background:#000;
- color:#fff;
- padding:12px 15px;
- border-radius:50%;
- font-size:20px;
- cursor:pointer;
+position:fixed;
+left:15px;
+bottom:15px;
+background:#111;
+color:#fff;
+padding:15px;
+border-radius:50%;
+cursor:pointer;
+font-size:20px;
 }
 
 #cart{
- position:fixed;
- top:0;
- left:0;
- width:100%;
- height:100%;
- background:rgba(0,0,0,.6);
- display:none;
- justify-content:center;
- align-items:center;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
 }
 
 .cart-box{
- background:#fff;
- width:90%;
- max-width:400px;
- padding:15px;
- border-radius:12px;
+background:#fff;
+width:90%;
+max-width:400px;
+padding:20px;
+border-radius:12px;
 }
 
 .close{
- text-align:left;
- cursor:pointer;
- font-weight:bold;
+text-align:left;
+cursor:pointer;
+font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<header>
- <h1>💎 متجر جواهر فري فاير</h1>
-</header>
+<header>💎 متجر جواهر فري فاير</header>
 
 <div class="container">
 
 <div class="card currency">
- <button class="active" onclick="setCurrency('egp')" id="egpBtn">جنيه مصري</button>
- <button onclick="setCurrency('sdg')" id="sdgBtn">جنيه سوداني</button>
+<button class="active" onclick="setCurrency('egp')" id="egpBtn">جنيه مصري</button>
+<button onclick="setCurrency('sdg')" id="sdgBtn">جنيه سوداني</button>
+</div>
+
+<div class="products">
+
+<div class="product">
+<h3>110 جوهرة</h3>
+<div class="price" id="p1">55 ج.م</div>
+<button onclick="addToCart('110 جوهرة',55,3600)">إضافة</button>
+</div>
+
+<div class="product">
+<h3>231 جوهرة</h3>
+<div class="price" id="p2">115 ج.م</div>
+<button onclick="addToCart('231 جوهرة',115,7500)">إضافة</button>
+</div>
+
+<div class="product">
+<h3>العضوية الأسبوعية</h3>
+<div class="price" id="p3">120 ج.م</div>
+<button onclick="addToCart('العضوية الأسبوعية',120,8600)">إضافة</button>
+</div>
+
+<div class="product">
+<h3>العضوية الشهرية</h3>
+<div class="price" id="p4">530 ج.م</div>
+<button onclick="addToCart('العضوية الشهرية',530,40500)">إضافة</button>
+</div>
+
 </div>
 
 <div class="card">
- <div class="product">
-  <div>العضوية الأسبوعية<br><strong id="wPrice">120 ج.م</strong></div>
-  <button onclick="addToCart('العضوية الأسبوعية',120,8600)">إضافة</button>
- </div>
-
- <div class="product">
-  <div>العضوية الشهرية<br><strong id="mPrice">530 ج.م</strong></div>
-  <button onclick="addToCart('العضوية الشهرية',530,40500)">إضافة</button>
- </div>
-</div>
-
-<div class="card">
- <strong>طريقة الدفع</strong>
- <select>
-  <option>بنكك</option>
-  <option>ماي كاشي</option>
-  <option>برافو</option>
-  <option>فوري</option>
-  <option>أوكاش</option>
- </select>
-
- <textarea placeholder="ملاحظات الطلب (اختياري)"></textarea>
+<strong>طريقة الدفع</strong>
+<select>
+<option>بنكك</option>
+<option>ماي كاشي</option>
+<option>برافو</option>
+<option>فوري</option>
+<option>أوكاش</option>
+</select>
+<textarea style="width:100%;margin-top:10px;" placeholder="ملاحظات الطلب (اختياري)"></textarea>
 </div>
 
 </div>
@@ -171,47 +187,49 @@ header h1{
 <div id="cartBtn" onclick="openCart()">🛒</div>
 
 <div id="cart">
- <div class="cart-box">
-  <div class="close" onclick="closeCart()">✖</div>
-  <h3>سلة الشراء</h3>
-  <ul id="cartItems"></ul>
-  <strong id="total"></strong>
- </div>
+<div class="cart-box">
+<div class="close" onclick="closeCart()">✖</div>
+<h3>سلة الشراء</h3>
+<ul id="cartItems"></ul>
+<strong id="total"></strong>
+</div>
 </div>
 
 <script>
 let currency='egp';
 let cart=[];
-let total=0;
 
 function setCurrency(c){
- currency=c;
- egpBtn.classList.toggle('active',c==='egp');
- sdgBtn.classList.toggle('active',c==='sdg');
- wPrice.textContent = c==='egp'?'120 ج.م':'8600 ج.س';
- mPrice.textContent = c==='egp'?'530 ج.م':'40500 ج.س';
+currency=c;
+egpBtn.classList.toggle('active',c==='egp');
+sdgBtn.classList.toggle('active',c==='sdg');
+
+document.getElementById('p1').textContent=c==='egp'?'55 ج.م':'3600 ج.س';
+document.getElementById('p2').textContent=c==='egp'?'115 ج.م':'7500 ج.س';
+document.getElementById('p3').textContent=c==='egp'?'120 ج.م':'8600 ج.س';
+document.getElementById('p4').textContent=c==='egp'?'530 ج.م':'40500 ج.س';
 }
 
 function addToCart(name,egp,sdg){
- let price = currency==='egp'?egp:sdg;
- cart.push({name,price});
- renderCart();
+let price=currency==='egp'?egp:sdg;
+cart.push({name,price});
+renderCart();
 }
 
 function renderCart(){
- let list=document.getElementById('cartItems');
- list.innerHTML='';
- total=0;
- cart.forEach(i=>{
-  total+=i.price;
-  list.innerHTML+=`<li>${i.name} - ${i.price} ${currency==='egp'?'ج.م':'ج.س'}</li>`;
- });
- document.getElementById('total').textContent=`الإجمالي: ${total} ${currency==='egp'?'ج.م':'ج.س'}`;
+let list=document.getElementById('cartItems');
+list.innerHTML='';
+let total=0;
+cart.forEach(i=>{
+total+=i.price;
+list.innerHTML+=`<li>${i.name} - ${i.price} ${currency==='egp'?'ج.م':'ج.س'}</li>`;
+});
+document.getElementById('total').textContent=`الإجمالي: ${total} ${currency==='egp'?'ج.م':'ج.س'}`;
 }
 
-function openCart(){ cart.style.display='flex'; }
-function closeCart(){ cart.style.display='none'; }
+function openCart(){document.getElementById('cart').style.display='flex'}
+function closeCart(){document.getElementById('cart').style.display='none'}
 </script>
 
 </body>
-  </html>
+ </html>
