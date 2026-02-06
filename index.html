@@ -6,11 +6,9 @@
 <title>Sudan Store</title>
 
 <style>
-/* ====== الهوية بالألوان السودانية 🇸🇩 ====== */
 body{
     font-family:'Tajawal',sans-serif;
     direction:rtl;
-    text-align:right;
     margin:0;
     background:#f4f4f4;
 }
@@ -22,109 +20,162 @@ header{
 header h1{margin:0;font-size:34px;font-weight:800;}
 header h1::before{content:"🛒 ";}
 
-/* ====== أدوات البحث و العملة ====== */
 .control-box{
     width:90%;margin:15px auto;background:#fff;padding:12px;
-    border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
+    border-radius:14px;box-shadow:0 0 10px #0002;
+    display:flex;gap:10px;
 }
 select,input{
-    flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
+    flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;
 }
 
-/* ====== المنتجات ====== */
 .item{
-    width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 10px #0001;
+    width:90%;background:#fff;margin:12px auto;padding:15px;
+    border-radius:15px;box-shadow:0 0 10px #0001;
 }
 .gem{font-size:22px;font-weight:bold;color:#009739;}
-.gem::before{content:"💎 ";font-size:22px;}
-.price{font-size:14px;color:#333;margin-top:4px;}
+.gem::before{content:"💎 ";}
+
+.price{font-size:14px;margin-top:4px;}
+.price span{display:none;}
+.price span.active{display:inline;}
+
 .add{
-    background:#e10600;color:white;border-radius:10px;padding:7px 15px;margin-top:8px;
-    font-weight:bold;display:inline-block;cursor:pointer;
+    background:#e10600;color:white;border-radius:10px;
+    padding:7px 15px;margin-top:8px;display:inline-block;
+    cursor:pointer;font-weight:bold;
 }
 .add:hover{background:#000;}
 
-/* ====== السلة ====== */
 .cart-box{
-    width:90%;background:white;margin:25px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 8px #0002;
+    width:90%;background:white;margin:25px auto;padding:15px;
+    border-radius:15px;box-shadow:0 0 8px #0002;
 }
-.cart-title{font-size:22px;font-weight:700;margin-bottom:10px;}
+.cart-title{font-size:22px;font-weight:700;}
 .cart-total{font-size:18px;color:#009739;font-weight:bold;margin:10px 0;}
 
 .cart-input{
     width:100%;margin:6px 0;padding:10px;border-radius:10px;
-    border:1px solid #ccc;font-size:15px;
+    border:1px solid #ccc;
 }
 
 .whatsapp-btn{
-    width:100%;background:#25D366;color:white;padding:12px;
-    font-size:18px;font-weight:bold;border-radius:12px;margin-top:10px;
+    width:100%;background:#25D366;color:white;
+    padding:12px;font-size:18px;font-weight:bold;
+    border-radius:12px;margin-top:10px;
     text-align:center;display:block;
+    opacity:.6;pointer-events:none;
 }
+
+/* زر القائمة الجانبية */
+.side-btn{
+    position:fixed;left:15px;bottom:15px;
+    background:#000;color:#fff;
+    width:50px;height:50px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;cursor:pointer;
+}
+
+/* النافذة */
+.side-panel{
+    position:fixed;top:0;left:-100%;
+    width:85%;height:100%;
+    background:#fff;z-index:999;
+    padding:20px;transition:.4s;
+    box-shadow:0 0 20px #0005;
+}
+.side-panel.open{left:0;}
+.side-panel h3{margin-top:0}
+.close{cursor:pointer;color:red;font-weight:bold}
 </style>
 </head>
+
 <body>
 
 <header>
 <h1>Sudan-Store</h1>
-<div>خدمة شحن ألعاب وبطاقات — SDG / EGP</div>
+<div>شحن ألعاب — اختر العملة التي تناسبك</div>
 </header>
 
-<!-- أدوات التحكم -->
 <div class="control-box">
-<select><option>الكل</option></select>
-<input placeholder="ابحث عن باقة مثال: 110">
-<select id="currency">
+<select id="currency" onchange="changeCurrency()">
 <option value="SDG">💵 SDG</option>
 <option value="EGP">💰 EGP</option>
 </select>
+<input placeholder="ابحث (قريبًا)">
 </div>
 
-<!-- ===== الباقات ===== -->
+<!-- المنتجات -->
+<div class="item">
+<span class="gem">110 جوهرة</span>
+<div class="price">
+<span class="sdg active">3600 SDG</span>
+<span class="egp">55 EGP</span>
+</div>
+<span class="add" onclick="addToCart('110 جوهرة',3600,55)">إضافة</span>
+</div>
 
-<div class="item"><span class="gem">60 جوهرة</span><div class="price">2000 SDG / 30 EGP</div><span class="add" onclick="addToCart('60 جوهرة',2000,30)">إضافة</span></div>
+<div class="item">
+<span class="gem">231 جوهرة</span>
+<div class="price">
+<span class="sdg active">7500 SDG</span>
+<span class="egp">115 EGP</span>
+</div>
+<span class="add" onclick="addToCart('231 جوهرة',7500,115)">إضافة</span>
+</div>
 
-<div class="item"><span class="gem">110 جوهرة</span><div class="price">3600 SDG / 55 EGP</div><span class="add" onclick="addToCart('110 جوهرة',3600,55)">إضافة</span></div>
+<div class="item">
+<span class="gem">⭐ العضوية الإسبوعية</span>
+<div class="price">
+<span class="sdg active">8600 SDG</span>
+<span class="egp">120 EGP</span>
+</div>
+<span class="add" onclick="addToCart('العضوية الإسبوعية',8600,120)">إضافة</span>
+</div>
 
-<div class="item"><span class="gem">231 جوهرة</span><div class="price">7500 SDG / 115 EGP</div><span class="add" onclick="addToCart('231 جوهرة',7500,115)">إضافة</span></div>
+<div class="item">
+<span class="gem">🔥 العضوية الشهرية</span>
+<div class="price">
+<span class="sdg active">40500 SDG</span>
+<span class="egp">530 EGP</span>
+</div>
+<span class="add" onclick="addToCart('العضوية الشهرية',40500,530)">إضافة</span>
+</div>
 
-<div class="item"><span class="gem">325 جوهرة</span><div class="price">10500 SDG / 160 EGP</div><span class="add" onclick="addToCart('325 جوهرة',10500,160)">إضافة</span></div>
+<!-- السلة -->
+<div class="cart-box">
+<div class="cart-title">🛍 سلة المشتريات</div>
+<div id="cart-content">لا توجد عناصر</div>
+<div id="cart-total" class="cart-total">0</div>
 
-<div class="item"><span class="gem">583 جوهرة</span><div class="price">18000 SDG / 280 EGP</div><span class="add" onclick="addToCart('583 جوهرة',18000,280)">إضافة</span></div>
+<select class="cart-input" id="payMethod">
+<option>بنكك</option>
+<option>ماي كاشي</option>
+<option>برافو</option>
+<option>فوري</option>
+<option>أوكاش</option>
+</select>
 
-<div class="item"><span class="gem">720 جوهرة</span><div class="price">22000 SDG / 340 EGP</div><span class="add" onclick="addToCart('720 جوهرة',22000,340)">إضافة</span></div>
+<input class="cart-input" id="playerID" placeholder="ID اللاعب">
+<textarea class="cart-input" id="notes" placeholder="ملاحظات إضافية"></textarea>
 
-<div class="item"><span class="gem">1180 جوهرة</span><div class="price">35500 SDG / 550 EGP</div><span class="add" onclick="addToCart('1180 جوهرة',35500,550)">إضافة</span></div>
+<a id="sendW" class="whatsapp-btn">إرسال الطلب</a>
+</div>
 
-<div class="item"><span class="gem">2420 جوهرة</span><div class="price">70500 SDG / 1100 EGP</div><span class="add" onclick="addToCart('2420 جوهرة',70500,1100)">إضافة</span></div>
+<!-- زر جانبي -->
+<div class="side-btn" onclick="togglePanel()">☰</div>
 
-<div class="item"><span class="gem">3600 جوهرة</span><div class="price">105000 SDG / 1650 EGP</div><span class="add" onclick="addToCart('3600 جوهرة',105000,1650)">إضافة</span></div>
+<div class="side-panel" id="panel">
+<div class="close" onclick="togglePanel()">✖ إغلاق</div>
 
-<div class="item"><span class="gem">7200 جوهرة</span><div class="price">205000 SDG / 3200 EGP</div><span class="add" onclick="addToCart('7200 جوهرة',205000,3200)">إضافة</span></div>
+<h3>كيفية الشراء</h3>
+<p>اختر الباقة ➜ أضف للسلة ➜ أدخل البيانات ➜ أرسل الطلب.</p>
 
-<!-- ===== العضويات ===== -->
+<h3>سياسة الاسترجاع</h3>
+<p>لا يمكن الاسترجاع بعد تنفيذ الشحن، في حال الخطأ تواصل معنا فورًا.</p>
 
-<div class="item"><span class="gem">⭐ العضوية الإسبوعية</span><div class="price">8600 SDG / 120 EGP</div><span class="add" onclick="addToCart('العضوية الإسبوعية',8600,120)">إضافة</span></div>
-
-<div class="item"><span class="gem">🔥 العضوية الشهرية</span><div class="price">40500 SDG / 530 EGP</div><span class="add" onclick="addToCart('العضوية الشهرية',40500,530)">إضافة</span></div>
-
-<!-- ===== سلة الطلب ===== -->
-<div class="cart-box" id="cart">
-    <div class="cart-title">🛍 سلة المشتريات</div>
-    <div id="cart-content">لا توجد عناصر بعد</div>
-    <div id="cart-total" class="cart-total">الإجمالي: 0 SDG / 0 EGP</div>
-
-    <select class="cart-input" id="payMethod">
-        <option>تحويل بنكي</option>
-        <option>محفظة</option>
-        <option>رصيد</option>
-        <option>كاش</option>
-    </select>
-
-    <input id="playerID" class="cart-input" placeholder="أدخل ID اللعبة">
-    <a id="sendW" class="whatsapp-btn" href="#">إرسال الطلب للواتساب 📩</a>
+<h3>خدمة العملاء</h3>
+<p>واتساب: +201035179385</p>
 </div>
 
 <script>
@@ -133,18 +184,23 @@ function addToCart(name,sdg,egp){
 cart.push({name,sdg,egp});
 updateCart();
 }
+
 function updateCart(){
 let list="",sdg=0,egp=0;
-cart.forEach(c=>{list+=`• ${c.name}<br>`;sdg+=c.sdg;egp+=c.egp});
-document.getElementById("cart-content").innerHTML=list||"لا توجد عناصر";
-document.getElementById("cart-total").innerHTML=`الإجمالي: ${sdg} SDG / ${egp} EGP`;
+cart.forEach(c=>{
+list+=`• ${c.name}<br>`;
+sdg+=c.sdg;egp+=c.egp;
+});
+document.getElementById("cart-content").innerHTML=list;
+let cur=document.getElementById("currency").value;
+document.getElementById("cart-total").innerText=
+cur=="SDG"?`الإجمالي: ${sdg} SDG`:`الإجمالي: ${egp} EGP`;
 
-let method=document.getElementById("payMethod").value;
-let ID=document.getElementById("playerID").value;
-let msg=`طلب جديد من Sudan-Store:%0A${list.replace(/<br>/g,"%0A")}%0Aالدفع: ${method}%0AID اللاعب: ${ID}%0Aالإجمالي: ${sdg} SDG / ${egp} EGP`;
-document.getElementById("sendW").href=`https://wa.me/201035179385?text=${msg}`;
-}
-</script>
-
-</body>
-    </html>
+let btn=document.getElementById("sendW");
+if(cart.length>0){
+btn.style.opacity=1;btn.style.pointerEvents="auto";
+let msg=`طلب جديد:\n${list.replace(/<br>/g,"\n")}
+\nالدفع: ${payMethod.value}
+\nID: ${playerID.value}
+\nملاحظات: ${notes.value}
+\n
