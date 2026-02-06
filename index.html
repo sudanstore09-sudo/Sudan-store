@@ -82,14 +82,35 @@ select,input{
 </select>
 </div>
 
-<!-- الباقات -->
-<div class="item"><span class="gem">110 جوهرة</span><div class="price">3600 SDG / 55 EGP</div><span class="add" onclick="addToCart('110',3600,55)">إضافة</span></div>
-<div class="item"><span class="gem">231 جوهرة</span><div class="price">7500 SDG / 115 EGP</div><span class="add" onclick="addToCart('231',7500,115)">إضافة</span></div>
-<div class="item"><span class="gem">583 جوهرة</span><div class="price">18000 SDG / 280 EGP</div><span class="add" onclick="addToCart('583',18000,280)">إضافة</span></div>
-<div class="item"><span class="gem">1180 جوهرة</span><div class="price">35500 SDG / 550 EGP</div><span class="add" onclick="addToCart('1180',35500,550)">إضافة</span></div>
-<div class="item"><span class="gem">2420 جوهرة</span><div class="price">70500 SDG / 1100 EGP</div><span class="add" onclick="addToCart('2420',70500,1100)">إضافة</span></div>
+<!-- ===== الباقات ===== -->
 
-<!-- سلة الطلب -->
+<div class="item"><span class="gem">60 جوهرة</span><div class="price">2000 SDG / 30 EGP</div><span class="add" onclick="addToCart('60 جوهرة',2000,30)">إضافة</span></div>
+
+<div class="item"><span class="gem">110 جوهرة</span><div class="price">3600 SDG / 55 EGP</div><span class="add" onclick="addToCart('110 جوهرة',3600,55)">إضافة</span></div>
+
+<div class="item"><span class="gem">231 جوهرة</span><div class="price">7500 SDG / 115 EGP</div><span class="add" onclick="addToCart('231 جوهرة',7500,115)">إضافة</span></div>
+
+<div class="item"><span class="gem">325 جوهرة</span><div class="price">10500 SDG / 160 EGP</div><span class="add" onclick="addToCart('325 جوهرة',10500,160)">إضافة</span></div>
+
+<div class="item"><span class="gem">583 جوهرة</span><div class="price">18000 SDG / 280 EGP</div><span class="add" onclick="addToCart('583 جوهرة',18000,280)">إضافة</span></div>
+
+<div class="item"><span class="gem">720 جوهرة</span><div class="price">22000 SDG / 340 EGP</div><span class="add" onclick="addToCart('720 جوهرة',22000,340)">إضافة</span></div>
+
+<div class="item"><span class="gem">1180 جوهرة</span><div class="price">35500 SDG / 550 EGP</div><span class="add" onclick="addToCart('1180 جوهرة',35500,550)">إضافة</span></div>
+
+<div class="item"><span class="gem">2420 جوهرة</span><div class="price">70500 SDG / 1100 EGP</div><span class="add" onclick="addToCart('2420 جوهرة',70500,1100)">إضافة</span></div>
+
+<div class="item"><span class="gem">3600 جوهرة</span><div class="price">105000 SDG / 1650 EGP</div><span class="add" onclick="addToCart('3600 جوهرة',105000,1650)">إضافة</span></div>
+
+<div class="item"><span class="gem">7200 جوهرة</span><div class="price">205000 SDG / 3200 EGP</div><span class="add" onclick="addToCart('7200 جوهرة',205000,3200)">إضافة</span></div>
+
+<!-- ===== العضويات ===== -->
+
+<div class="item"><span class="gem">⭐ العضوية الإسبوعية</span><div class="price">8600 SDG / 120 EGP</div><span class="add" onclick="addToCart('العضوية الإسبوعية',8600,120)">إضافة</span></div>
+
+<div class="item"><span class="gem">🔥 العضوية الشهرية</span><div class="price">40500 SDG / 530 EGP</div><span class="add" onclick="addToCart('العضوية الشهرية',40500,530)">إضافة</span></div>
+
+<!-- ===== سلة الطلب ===== -->
 <div class="cart-box" id="cart">
     <div class="cart-title">🛍 سلة المشتريات</div>
     <div id="cart-content">لا توجد عناصر بعد</div>
@@ -114,16 +135,16 @@ updateCart();
 }
 function updateCart(){
 let list="",sdg=0,egp=0;
-cart.forEach(c=>{list+=`• ${c.name} جوهرة<br>`;sdg+=c.sdg;egp+=c.egp});
+cart.forEach(c=>{list+=`• ${c.name}<br>`;sdg+=c.sdg;egp+=c.egp});
 document.getElementById("cart-content").innerHTML=list||"لا توجد عناصر";
 document.getElementById("cart-total").innerHTML=`الإجمالي: ${sdg} SDG / ${egp} EGP`;
 
-/* واتساب توليد الرسالة */
 let method=document.getElementById("payMethod").value;
 let ID=document.getElementById("playerID").value;
-let msg=`طلب جديد من Sudan-Store:%0Aالباقات:%0A${list.replace(/<br>/g,"%0A")}%0Aالدفع: ${method}%0AID اللاعب: ${ID}%0Aالإجمالي: ${sdg} SDG / ${egp} EGP`;
-document.getElementById("sendW").href=`https://wa.me/201234567890?text=${msg}`;
+let msg=`طلب جديد من Sudan-Store:%0A${list.replace(/<br>/g,"%0A")}%0Aالدفع: ${method}%0AID اللاعب: ${ID}%0Aالإجمالي: ${sdg} SDG / ${egp} EGP`;
+document.getElementById("sendW").href=`https://wa.me/201035179385?text=${msg}`;
 }
 </script>
+
 </body>
-                      </html>
+    </html>
