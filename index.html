@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sudan-Store</title>
 <style>
-/* ====== الهوية بالألوان السودانية 🇸🇩 ====== */
 body{
     font-family:'Tajawal',sans-serif;
     direction:rtl;
@@ -21,7 +20,6 @@ header{
 header h1{margin:0;font-size:34px;font-weight:800;}
 header h1::before{content:"🛒 ";}
 
-/* ====== أدوات التحكم ====== */
 .control-box{
     width:90%;margin:15px auto;background:#fff;padding:12px;
     border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
@@ -30,29 +28,25 @@ select,input,button{
     flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
 }
 button.menu-btn{
-    flex:0; background:#009739;color:#fff;font-weight:bold; cursor:pointer;
+    flex:0;background:#009739;color:#fff;font-weight:bold;cursor:pointer;
 }
 
-/* ====== المنتجات ====== */
 .item{
     width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 10px #0001; display:flex; justify-content: space-between; align-items:center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow:0 0 10px #0001;display:flex;justify-content:space-between;align-items:center;
 }
-.item:hover{transform: translateY(-3px); box-shadow:0 5px 15px #0002;}
 .gem{font-size:22px;font-weight:bold;color:#009739;}
 .gem::before{content:"💎 ";}
 .price{font-size:14px;color:#333;margin-left:10px;}
 .add{
     background:#e10600;color:white;border-radius:10px;padding:7px 15px;
-    font-weight:bold;cursor:pointer; transition: background 0.3s;
+    font-weight:bold;cursor:pointer;
 }
 .add:hover{background:#000;}
 
-/* ====== السلة ====== */
 .cart-box{
     width:90%;background:white;margin:25px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 8px #0002; position: relative;
+    box-shadow:0 0 8px #0002;
 }
 .cart-title{font-size:22px;font-weight:700;margin-bottom:10px;}
 .cart-total{font-size:18px;color:#009739;font-weight:bold;margin:10px 0;}
@@ -66,26 +60,27 @@ button.menu-btn{
     text-align:center;display:block;text-decoration:none;
 }
 
-/* ====== Sidebar ====== */
 #sidebar{
-    position:fixed; top:0; right:-350px; width:350px; height:100%;
-    background:#fff; box-shadow:-2px 0 10px rgba(0,0,0,0.2); transition:right 0.3s;
-    z-index:1000; padding:20px; overflow-y:auto;
+    position:fixed;top:0;right:-350px;width:350px;height:100%;
+    background:#fff;box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+    transition:right 0.3s;z-index:1000;padding:20px;overflow-y:auto;
 }
 #sidebar.open{right:0;}
-.sidebar-close{background:#e10600;color:#fff;border:none;padding:6px 12px;cursor:pointer;border-radius:8px;margin-bottom:15px;}
-
-/* ====== Toast رسالة نجاح ====== */
-#notify{
-    position:fixed; top:20px; left:50%; transform:translateX(-50%);
-    background:#25d366;color:#fff;padding:10px 20px;border-radius:6px; display:none; font-weight:bold;
-    z-index:999;
+.sidebar-close{
+    background:#e10600;color:#fff;border:none;padding:6px 12px;
+    cursor:pointer;border-radius:8px;margin-bottom:15px;
 }
 
-/* ====== زر سلة عائمة ====== */
+#notify{
+    position:fixed;top:20px;left:50%;transform:translateX(-50%);
+    background:#25d366;color:#fff;padding:10px 20px;border-radius:6px;
+    display:none;font-weight:bold;z-index:999;
+}
+
 #floatCart{
-    position:fixed; bottom:20px; left:20px;background:#009739;color:#fff;
-    font-size:22px;padding:12px 18px;border-radius:50px;text-align:center;cursor:pointer; z-index:999;
+    position:fixed;bottom:20px;left:20px;background:#009739;color:#fff;
+    font-size:22px;padding:12px 18px;border-radius:50px;
+    text-align:center;cursor:pointer;z-index:999;
 }
 </style>
 </head>
@@ -96,7 +91,6 @@ button.menu-btn{
 <div>خدمة شحن ألعاب وبطاقات — SDG / EGP</div>
 </header>
 
-<!-- أدوات التحكم -->
 <div class="control-box">
 <select id="currency">
 <option value="SDG">💵 SDG</option>
@@ -106,10 +100,8 @@ button.menu-btn{
 <button class="menu-btn" onclick="openSidebar()">☰ القائمة</button>
 </div>
 
-<!-- Toast -->
 <div id="notify">تمت الإضافة للسلة ✅</div>
 
-<!-- الباقات -->
 <div class="item"><span class="gem">110 جوهرة</span><span class="price">3600 SDG / 55 EGP</span><span class="add" onclick="addToCart('110 جوهرة',3600,55)">إضافة</span></div>
 <div class="item"><span class="gem">231 جوهرة</span><span class="price">7500 SDG / 115 EGP</span><span class="add" onclick="addToCart('231 جوهرة',7500,115)">إضافة</span></div>
 <div class="item"><span class="gem">583 جوهرة</span><span class="price">18000 SDG / 280 EGP</span><span class="add" onclick="addToCart('583 جوهرة',18000,280)">إضافة</span></div>
@@ -118,7 +110,6 @@ button.menu-btn{
 <div class="item"><span class="gem">عضوية أسبوعية</span><span class="price">8600 SDG / 120 EGP</span><span class="add" onclick="addToCart('عضوية أسبوعية',8600,120)">إضافة</span></div>
 <div class="item"><span class="gem">عضوية شهرية</span><span class="price">40500 SDG / 530 EGP</span><span class="add" onclick="addToCart('عضوية شهرية',40500,530)">إضافة</span></div>
 
-<!-- سلة الطلب -->
 <div class="cart-box">
 <div class="cart-title">🛍 سلة المشتريات</div>
 <div id="cart-content">لا توجد عناصر بعد</div>
@@ -135,7 +126,6 @@ button.menu-btn{
 <a id="sendW" class="whatsapp-btn" href="#">إرسال الطلب للواتساب 📩</a>
 </div>
 
-<!-- Sidebar -->
 <div id="sidebar">
 <button class="sidebar-close" onclick="closeSidebar()">✖ إغلاق</button>
 <h3>السياسة & معلومات</h3>
@@ -144,7 +134,6 @@ button.menu-btn{
 <p><b>كيفية الشراء:</b> اختر المنتج → أضفه للسلة → اختر طريقة الدفع → أدخل ID اللعبة → أرسل الطلب للواتساب.</p>
 </div>
 
-<!-- زر السلة العائم -->
 <div id="floatCart" onclick="scrollToCart()">🛒</div>
 
 <script>
@@ -182,11 +171,21 @@ function updateCart(){
 
 function generateWhatsAppLink(list,sdg,egp){
 
-    let method=document.getElementById("payMethod").value;
-    let ID=document.getElementById("playerID").value;
-    let notes=document.getElementById("notes").value;
+    if(cart.length===0){
+        document.getElementById("sendW").href="#";
+        return;
+    }
 
-    let message = 
+    let method=document.getElementById("payMethod").value;
+    let ID=document.getElementById("playerID").value.trim();
+    let notes=document.getElementById("notes").value.trim();
+
+    if(ID===""){
+        document.getElementById("sendW").href="#";
+        return;
+    }
+
+    let message =
 `طلب جديد من Sudan-Store:
 الباقات:
 ${list}
@@ -201,12 +200,10 @@ ID اللاعب: ${ID}
         `https://wa.me/201035179385?text=${encodedMessage}`;
 }
 
-/* نخلي اللينك يتحدث أول ما المستخدم يكتب */
 document.getElementById("playerID").addEventListener("input", updateCart);
 document.getElementById("notes").addEventListener("input", updateCart);
 document.getElementById("payMethod").addEventListener("change", updateCart);
 
-/* Sidebar */
 function openSidebar(){
     document.getElementById("sidebar").classList.add("open");
 }
@@ -216,7 +213,8 @@ function closeSidebar(){
 function scrollToCart(){
     document.querySelector('.cart-box').scrollIntoView({behavior:'smooth'});
 }
-    document.addEventListener("click", function(e){
+
+document.addEventListener("click", function(e){
     const sidebar=document.getElementById("sidebar");
     const btn=document.querySelector(".menu-btn");
 
@@ -225,7 +223,8 @@ function scrollToCart(){
        !btn.contains(e.target)){
         sidebar.classList.remove("open");
     }
-
 });
+</script>
+
 </body>
-    </html>
+                                                                                                 </html>
