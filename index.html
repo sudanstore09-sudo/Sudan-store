@@ -169,8 +169,8 @@ function updateCart(){
     document.getElementById("cart-total").innerHTML=`الإجمالي: ${sdg} SDG / ${egp} EGP`;
 
     let method=document.getElementById("payMethod").value;
-    let ID=document.getElementById("playerID").value;
-    let notes=document.getElementById("notes").value;
+    let ID = document.getElementById("playerID").value || "لم يتم الإدخال";
+    let notes = document.getElementById("notes").value || "لا توجد";
     let msg=`طلب جديد من Sudan-Store:%0Aالباقات:%0A${list.replace(/<br>/g,"%0A")}%0Aطريقة الدفع: ${method}%0AID اللاعب: ${ID}%0Aملاحظات: ${notes}%0Aالإجمالي: ${sdg} SDG / ${egp} EGP`;
     document.getElementById("sendW").href=`https://wa.me/201035179385?text=${msg}`;
 }
