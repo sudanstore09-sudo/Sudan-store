@@ -164,21 +164,68 @@ function addToCart(name,sdg,egp){
 
 function updateCart(){
     let list="",sdg=0,egp=0;
-    cart.forEach(c=>{list+=`• ${c.name}<br>`; sdg+=c.sdg; egp+=c.egp;});
-    document.getElementById("cart-content").innerHTML=list||"لا توجد عناصر";
-    document.getElementById("cart-total").innerHTML=`الإجمالي: ${sdg} SDG / ${egp} EGP`;
 
-    let method=document.getElementById("payMethod").value;
-    let ID = document.getElementById("playerID").value || "لم يتم الإدخال";
-    let notes = document.getElementById("notes").value || "لا توجد";
-    let msg=`طلب جديد من Sudan-Store:%0Aالباقات:%0A${list.replace(/<br>/g,"%0A")}%0Aطريقة الدفع: ${method}%0AID اللاعب: ${ID}%0Aملاحظات: ${notes}%0Aالإجمالي: ${sdg} SDG / ${egp} EGP`;
-    document.getElementById("sendW").href=`https://wa.me/201035179385?text=${msg}`;
+    cart.forEach(c=>{
+        list+=`• ${c.name}\n`;
+        sdg+=c.sdg;
+        egp+=c.egp;
+    });
+
+    document.getElementById("cart-content").innerHTML =
+        list ? list.replace(/\n/g,"<br>") : "لا توجد عناصر";
+
+    document.getElementById("cart-total").innerHTML =
+        `الإجمالي: ${sdg} SDG / ${egp} EGP`;
+
+    generateWhatsAppLink(list,sdg,egp);
 }
 
-function openSidebar(){document.getElementById("sidebar").classList.add("open");}
-function closeSidebar(){document.getElementById("sidebar").classList.remove("open");}
-function scrollToCart(){document.querySelector('.cart-box').scrollIntoView({behavior:'smooth'});}
-</script>
+function generateWhatsAppLink(list,sdg,egp){
 
+    let method=document.getElementById("payMethod").value;
+    let ID=document.getElementById("playerID").value;
+    let notes=document.getElementById("notes").value;
+
+    let message = 
+`طلب جديد من Sudan-Store:
+الباقات:
+${list}
+طريقة الدفع: ${method}
+ID اللاعب: ${ID}
+ملاحظات: ${notes}
+الإجمالي: ${sdg} SDG / ${egp} EGP`;
+
+    let encodedMessage = encodeURIComponent(message);
+
+    document.getElementById("sendW").href =
+        `https://wa.me/201035179385?text=${encodedMessage}`;
+}
+
+/* نخلي اللينك يتحدث أول ما المستخدم يكتب */
+document.getElementById("playerID").addEventListener("input", updateCart);
+document.getElementById("notes").addEventListener("input", updateCart);
+document.getElementById("payMethod").addEventListener("change", updateCart);
+
+/* Sidebar */
+function openSidebar(){
+    document.getElementById("sidebar").classList.add("open");
+}
+function closeSidebar(){
+    document.getElementById("sidebar").classList.remove("open");
+}
+function scrollToCart(){
+    document.querySelector('.cart-box').scrollIntoView({behavior:'smooth'});
+}
+    document.addEventListener("click", function(e){
+    const sidebar=document.getElementById("sidebar");
+    const btn=document.querySelector(".menu-btn");
+
+    if(sidebar.classList.contains("open") &&
+       !sidebar.contains(e.target) &&
+       !btn.contains(e.target)){
+        sidebar.classList.remove("open");
+    }
+
+});
 </body>
     </html>
