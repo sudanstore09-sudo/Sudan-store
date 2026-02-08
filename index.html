@@ -27,9 +27,6 @@ header h1::before{content:"🛒 ";}
 select,input,button{
     flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
 }
-button.menu-btn{
-    flex:0;background:#009739;color:#fff;font-weight:bold;cursor:pointer;
-}
 
 .item{
     width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
@@ -60,17 +57,6 @@ button.menu-btn{
     text-align:center;display:block;text-decoration:none;
 }
 
-#sidebar{
-    position:fixed;top:0;right:-350px;width:350px;height:100%;
-    background:#fff;box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-    transition:right 0.3s;z-index:1000;padding:20px;overflow-y:auto;
-}
-#sidebar.open{right:0;}
-.sidebar-close{
-    background:#e10600;color:#fff;border:none;padding:6px 12px;
-    cursor:pointer;border-radius:8px;margin-bottom:15px;
-}
-
 #notify{
     position:fixed;top:20px;left:50%;transform:translateX(-50%);
     background:#25d366;color:#fff;padding:10px 20px;border-radius:6px;
@@ -97,19 +83,11 @@ button.menu-btn{
 <option value="EGP">💰 EGP</option>
 </select>
 <input id="search" placeholder="ابحث عن باقة مثال: 110">
-<button class="menu-btn" onclick="openSidebar()">☰ القائمة</button>
 </div>
 
 <div id="notify">تمت الإضافة للسلة ✅</div>
 
-<div class="item"><span class="gem">110 جوهرة</span><span class="price">3600 SDG / 55 EGP</span><span class="add" onclick="addToCart('110 جوهرة',3600,55)">إضافة</span></div>
-<div class="item"><span class="gem">231 جوهرة</span><span class="price">7500 SDG / 115 EGP</span><span class="add" onclick="addToCart('231 جوهرة',7500,115)">إضافة</span></div>
-<div class="item"><span class="gem">583 جوهرة</span><span class="price">18000 SDG / 280 EGP</span><span class="add" onclick="addToCart('583 جوهرة',18000,280)">إضافة</span></div>
-<div class="item"><span class="gem">1180 جوهرة</span><span class="price">35500 SDG / 550 EGP</span><span class="add" onclick="addToCart('1180 جوهرة',35500,550)">إضافة</span></div>
-<div class="item"><span class="gem">2420 جوهرة</span><span class="price">70500 SDG / 1100 EGP</span><span class="add" onclick="addToCart('2420 جوهرة',70500,1100)">إضافة</span></div>
-<div class="item"><span class="gem">عضوية أسبوعية</span><span class="price">8600 SDG / 120 EGP</span><span class="add" onclick="addToCart('عضوية أسبوعية',8600,120)">إضافة</span></div>
-<div class="item"><span class="gem">عضوية شهرية</span><span class="price">40500 SDG / 530 EGP</span><span class="add" onclick="addToCart('عضوية شهرية',40500,530)">إضافة</span></div>
-
+<!-- السلة -->
 <div class="cart-box">
 <div class="cart-title">🛍 سلة المشتريات</div>
 <div id="cart-content">لا توجد عناصر بعد</div>
@@ -126,19 +104,42 @@ button.menu-btn{
 <a id="sendW" class="whatsapp-btn" href="#">إرسال الطلب للواتساب 📩</a>
 </div>
 
-<div id="sidebar">
-<button class="sidebar-close" onclick="closeSidebar()">✖ إغلاق</button>
-<h3>السياسة & معلومات</h3>
-<p><b>سياسة الاسترجاع:</b> يمكنك إرجاع الباقات خلال 24 ساعة إذا لم يتم تفعيلها.</p>
-<p><b>خدمة العملاء:</b> للتواصل عبر واتساب: +201035179385</p>
-<p><b>كيفية الشراء:</b> اختر المنتج → أضفه للسلة → اختر طريقة الدفع → أدخل ID اللعبة → أرسل الطلب للواتساب.</p>
-</div>
-
 <div id="floatCart" onclick="scrollToCart()">🛒</div>
 
 <script>
+// ======== بيانات المنتجات ========
 let cart=[];
+const products = [
+    {name:"110 جوهرة", sdg:3600, egp:55},
+    {name:"231 جوهرة", sdg:7500, egp:115},
+    {name:"583 جوهرة", sdg:18000, egp:280},
+    {name:"1180 جوهرة", sdg:35500, egp:550},
+    {name:"2420 جوهرة", sdg:70500, egp:1100},
+    {name:"عضوية أسبوعية", sdg:8600, egp:120},
+    {name:"عضوية شهرية", sdg:40500, egp:530},
+];
 
+// ======== عرض المنتجات حسب العملة ========
+function renderProducts(){
+    const currency = document.getElementById("currency").value;
+    const controlBox = document.querySelector('.control-box');
+    // إزالة المنتجات القديمة
+    document.querySelectorAll('.item').forEach(i=>i.remove());
+
+    // إنشاء HTML للمنتجات
+    const itemsHTML = products.map(p=>{
+        const price = currency === "SDG" ? p.sdg+" SDG" : p.egp+" EGP";
+        return `<div class="item">
+            <span class="gem">${p.name}</span>
+            <span class="price">${price}</span>
+            <span class="add" onclick="addToCart('${p.name}',${p.sdg},${p.egp})">إضافة</span>
+        </div>`;
+    }).join('');
+
+    controlBox.insertAdjacentHTML('afterend', itemsHTML);
+}
+
+// ======== سلة الشراء ========
 function showNotify(){
     const n=document.getElementById("notify");
     n.style.display="block";
@@ -153,7 +154,6 @@ function addToCart(name,sdg,egp){
 
 function updateCart(){
     let list="",sdg=0,egp=0;
-
     cart.forEach(c=>{
         list+=`• ${c.name}\n`;
         sdg+=c.sdg;
@@ -163,27 +163,25 @@ function updateCart(){
     document.getElementById("cart-content").innerHTML =
         list ? list.replace(/\n/g,"<br>") : "لا توجد عناصر";
 
-    document.getElementById("cart-total").innerHTML =
-        `الإجمالي: ${sdg} SDG / ${egp} EGP`;
+    const currency = document.getElementById("currency").value;
+    if(currency==="SDG"){
+        document.getElementById("cart-total").innerHTML = `الإجمالي: ${sdg} SDG`;
+    } else {
+        document.getElementById("cart-total").innerHTML = `الإجمالي: ${egp} EGP`;
+    }
 
     generateWhatsAppLink(list,sdg,egp);
 }
 
 function generateWhatsAppLink(list,sdg,egp){
-
-    if(cart.length===0){
-        document.getElementById("sendW").href="#";
-        return;
-    }
-
+    if(cart.length===0){document.getElementById("sendW").href="#";return;}
     let method=document.getElementById("payMethod").value;
     let ID=document.getElementById("playerID").value.trim();
     let notes=document.getElementById("notes").value.trim();
+    if(ID===""){document.getElementById("sendW").href="#";return;}
 
-    if(ID===""){
-        document.getElementById("sendW").href="#";
-        return;
-    }
+    const currency = document.getElementById("currency").value;
+    const total = currency==="SDG"?sdg+" SDG":egp+" EGP";
 
     let message =
 `طلب جديد من Sudan-Store:
@@ -192,39 +190,26 @@ ${list}
 طريقة الدفع: ${method}
 ID اللاعب: ${ID}
 ملاحظات: ${notes}
-الإجمالي: ${sdg} SDG / ${egp} EGP`;
-
-    let encodedMessage = encodeURIComponent(message);
+الإجمالي: ${total}`;
 
     document.getElementById("sendW").href =
-        `https://wa.me/201035179385?text=${encodedMessage}`;
+        `https://wa.me/201035179385?text=${encodeURIComponent(message)}`;
 }
 
+// ======== تحديث ديناميكي ========
 document.getElementById("playerID").addEventListener("input", updateCart);
 document.getElementById("notes").addEventListener("input", updateCart);
 document.getElementById("payMethod").addEventListener("change", updateCart);
+document.getElementById("currency").addEventListener("change", ()=>{ renderProducts(); updateCart(); });
 
-function openSidebar(){
-    document.getElementById("sidebar").classList.add("open");
-}
-function closeSidebar(){
-    document.getElementById("sidebar").classList.remove("open");
-}
+// ======== تمرير السلة للتمرير ========
 function scrollToCart(){
     document.querySelector('.cart-box').scrollIntoView({behavior:'smooth'});
 }
 
-document.addEventListener("click", function(e){
-    const sidebar=document.getElementById("sidebar");
-    const btn=document.querySelector(".menu-btn");
-
-    if(sidebar.classList.contains("open") &&
-       !sidebar.contains(e.target) &&
-       !btn.contains(e.target)){
-        sidebar.classList.remove("open");
-    }
-});
+// ======== عرض المنتجات عند التحميل ========
+renderProducts();
 </script>
 
 </body>
-                                                                                                 </html>
+</html>
