@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sudan-Store | شحن ألعاب فوري</title>
+<title>Sudan-Store PRO</title>
 
 <style>
 body{
@@ -17,51 +17,79 @@ body{
 
 header{
     background:linear-gradient(45deg,#e10600,#000,#009739);
-    color:#fff;text-align:center;padding:25px 0;
-    border-bottom-left-radius:25px;border-bottom-right-radius:25px;
+    color:#fff;
+    text-align:center;
+    padding:25px 0;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
 }
 
 header h1{margin:0;font-size:34px;font-weight:800;}
 header h1::before{content:"🛒 ";}
 
 .control-box{
-    width:90%;margin:15px auto;background:#fff;padding:12px;
-    border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
-}
-
-select,input{
-    flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
+    width:90%;
+    margin:15px auto;
+    background:#fff;
+    padding:12px;
+    border-radius:14px;
+    box-shadow:0 0 10px #0002;
 }
 
 .item{
-    width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 10px #0001;display:flex;justify-content:space-between;align-items:center;
+    width:90%;
+    background:#fff;
+    margin:12px auto;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 0 10px #0001;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.gem{font-size:22px;font-weight:bold;color:#009739;}
-.price{font-size:14px;color:#333;margin-left:10px;}
-
 .add{
-    background:#e10600;color:white;border-radius:10px;padding:7px 15px;
-    font-weight:bold;cursor:pointer;
+    background:#e10600;
+    color:white;
+    border-radius:10px;
+    padding:7px 15px;
+    cursor:pointer;
 }
 
 .cart-box{
-    width:90%;background:white;margin:25px auto;padding:15px;border-radius:15px;
+    width:90%;
+    background:white;
+    margin:25px auto;
+    padding:15px;
+    border-radius:15px;
     box-shadow:0 0 8px #0002;
 }
 
-.cart-total{font-size:18px;color:#009739;font-weight:bold;margin:10px 0;}
+.cart-total{
+    font-size:18px;
+    color:#009739;
+    font-weight:bold;
+}
 
-.cart-input{
-    width:100%;margin:6px 0;padding:10px;border-radius:10px;
-    border:1px solid #ccc;font-size:15px;
+input,select{
+    width:100%;
+    margin-top:8px;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ccc;
 }
 
 .whatsapp-btn{
-    width:100%;background:#25D366;color:white;padding:12px;
-    font-size:18px;font-weight:bold;border-radius:12px;margin-top:10px;
-    text-align:center;display:block;text-decoration:none;
+    width:100%;
+    background:#25D366;
+    color:white;
+    padding:12px;
+    font-size:18px;
+    border-radius:12px;
+    margin-top:10px;
+    text-align:center;
+    display:block;
+    text-decoration:none;
 }
 </style>
 </head>
@@ -69,16 +97,9 @@ select,input{
 <body>
 
 <header>
-<h1>Sudan-Store</h1>
-<div>خدمة شحن ألعاب وبطاقات</div>
+<h1>Sudan-Store PRO</h1>
+<div>شحن ألعاب فوري وآمن</div>
 </header>
-
-<div class="control-box">
-<select id="currency">
-<option value="SDG">SDG</option>
-<option value="EGP">EGP</option>
-</select>
-</div>
 
 <div class="item">
 <span>110 جوهرة</span>
@@ -115,72 +136,68 @@ select,input{
 </div>
 
 <script>
-let cart=[];
+let cart = [];
 
-// ===== إضافة للسلة =====
+// إضافة للسلة
 function addToCart(name,price){
-cart.push({name,price});
-render();
+    cart.push({name,price});
+    render();
 }
 
-// ===== عرض السلة =====
+// عرض السلة
 function render(){
-let list="";
-cart.forEach(c=>{
-list+=`• ${c.name} - ${c.price}<br>`;
-});
-document.getElementById("list").innerHTML=list || "لا يوجد عناصر";
+    let html="";
+    cart.forEach(i=>{
+        html += `• ${i.name} - ${i.price} SDG<br>`;
+    });
+    document.getElementById("list").innerHTML = html || "لا يوجد عناصر";
 }
 
-// ===== إرسال الطلب =====
+// إرسال الطلب
 async function sendOrder(){
 
-let id=document.getElementById("playerID").value.trim();
-let pay=document.getElementById("pay").value;
-let notes=document.getElementById("notes").value.trim();
+    let id = document.getElementById("playerID").value.trim();
+    let pay = document.getElementById("pay").value;
+    let notes = document.getElementById("notes").value.trim();
 
-if(cart.length===0){
-alert("السلة فارغة");
-return;
-}
+    if(cart.length === 0){
+        alert("السلة فارغة");
+        return;
+    }
 
-if(id===""){
-alert("من فضلك أدخل Player ID");
-return;
-}
+    if(!id){
+        alert("اكتب Player ID");
+        return;
+    }
 
-// حساب الإجمالي
-let total = cart.reduce((sum,i)=>sum+i.price,0);
+    let total = cart.reduce((a,b)=>a+b.price,0);
 
-// WhatsApp Message
-let msg="طلب جديد:\n";
+    let message = "طلب جديد:\n";
 
-cart.forEach(c=>{
-msg+=`${c.name} - ${c.price}\n`;
-});
+    cart.forEach(c=>{
+        message += `${c.name} - ${c.price}\n`;
+    });
 
-msg+=`\nID: ${id}\nطريقة الدفع: ${pay}\nالإجمالي: ${total}`;
+    message += `\nID: ${id}\nطريقة الدفع: ${pay}\nالإجمالي: ${total}`;
 
-window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
+    window.open("https://wa.me/201035179385?text="+encodeURIComponent(message));
 
-// حفظ في Firebase (لو متاح)
-if(window.saveOrder){
+    // Firebase save (optional)
+    if(window.saveOrder){
+        await saveOrder({
+            items: cart,
+            playerID: id,
+            payment: pay,
+            notes: notes,
+            total: total,
+            status: "new",
+            createdAt: new Date().toISOString()
+        });
+    }
 
-await saveOrder({
-items: cart,
-playerID: id,
-payment: pay,
-notes: notes,
-total: total,
-status: "جديد",
-createdAt: new Date().toISOString()
-});
-
-}
-
-cart=[];
-render();
-alert("تم إرسال الطلب بنجاح ✅");
+    cart = [];
+    render();
+    alert("تم إرسال الطلب بنجاح ✅");
 }
 </script>
 
@@ -201,10 +218,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// global function
 window.saveOrder = async function(order){
     await addDoc(collection(db,"orders"), order);
-};
+}
 </script>
 
 </body>
