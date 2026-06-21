@@ -181,8 +181,42 @@ footer{
 <option>أوكاش</option>
 </select>
 
-<a class="btn" onclick="send()">إرسال الطلب</a>
-</div>
+async function send(){
+
+let id=document.getElementById("id").value;
+let pay=document.getElementById("pay").value;
+
+if(cart.length===0){
+alert("السلة فارغة");
+return;
+}
+
+let order = {
+items: cart,
+playerID: id,
+payment: pay,
+status: "جديد",
+time: new Date().toISOString()
+};
+
+// حفظ في Firebase
+await addDoc(collection(db,"orders"), order);
+
+let msg="طلب جديد:\n";
+
+cart.forEach(c=>{
+msg+=`${c.name} - ${c.price}\n`;
+});
+
+msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
+
+window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
+
+// تفريغ السلة
+cart=[];
+render();
+alert("تم إرسال الطلب وحفظه بنجاح ✅");
+}
 
 <footer>
 © Arena TopUp - جميع الحقوق محفوظة
