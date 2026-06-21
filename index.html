@@ -219,6 +219,7 @@ msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
 window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
 }
 </script>
-
+<script type="module">
+import { db, collection, addDoc } from "./firebase.js";
 </body>
 </html>
