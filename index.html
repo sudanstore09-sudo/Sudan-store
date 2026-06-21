@@ -4,256 +4,192 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arena TopUp | شحن ألعاب فوري</title>
-
-<meta name="description" content="متجر Arena TopUp لشحن الألعاب - جواهر فري فاير وببجي بسرعة وأمان وأسعار مناسبة">
-<meta name="keywords" content="شحن فري فاير, جواهر, ببجي, شحن ألعاب, Arena TopUp">
-<meta name="author" content="Arena TopUp">
-
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Sudan-Store | شحن ألعاب فوري</title>
 
 <style>
 body{
-    margin:0;
     font-family:'Tajawal',sans-serif;
-    background:#0f172a;
-    color:#fff;
-}
-
-/* HEADER */
-header{
-    background:linear-gradient(45deg,#111827,#1f2937);
-    padding:25px;
-    text-align:center;
-    border-bottom:2px solid #22c55e;
-}
-
-header h1{
+    direction:rtl;
     margin:0;
-    font-size:32px;
-    color:#22c55e;
+    background:#f4f4f4;
+    overflow-x:hidden;
 }
 
-header p{
-    margin-top:5px;
-    font-size:14px;
-    color:#cbd5e1;
+header{
+    background:linear-gradient(45deg,#e10600,#000,#009739);
+    color:#fff;text-align:center;padding:25px 0;
+    border-bottom-left-radius:25px;border-bottom-right-radius:25px;
+}
+header h1{margin:0;font-size:34px;font-weight:800;}
+header h1::before{content:"🛒 ";}
+
+.control-box{
+    width:90%;margin:15px auto;background:#fff;padding:12px;
+    border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
+}
+select,input{
+    flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
 }
 
-/* HERO */
-.hero{
-    text-align:center;
-    padding:25px;
+.item{
+    width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
+    box-shadow:0 0 10px #0001;display:flex;justify-content:space-between;align-items:center;
+}
+.gem{font-size:22px;font-weight:bold;color:#009739;}
+.price{font-size:14px;color:#333;margin-left:10px;}
+.add{
+    background:#e10600;color:white;border-radius:10px;padding:7px 15px;
+    font-weight:bold;cursor:pointer;
 }
 
-.hero h2{
-    font-size:22px;
+.cart-box{
+    width:90%;background:white;margin:25px auto;padding:15px;border-radius:15px;
+    box-shadow:0 0 8px #0002;
 }
 
-.hero span{
-    color:#22c55e;
+.cart-total{font-size:18px;color:#009739;font-weight:bold;margin:10px 0;}
+
+.cart-input{
+    width:100%;margin:6px 0;padding:10px;border-radius:10px;
+    border:1px solid #ccc;font-size:15px;
 }
 
-/* FEATURES */
-.features{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    padding:15px;
-}
-
-.feature{
-    background:#111827;
-    padding:10px;
-    border-radius:10px;
-    text-align:center;
-    font-size:13px;
-}
-
-/* PRODUCTS */
-.products{
-    padding:15px;
-}
-
-.product{
-    background:#111827;
-    margin-bottom:10px;
-    padding:15px;
-    border-radius:12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border:1px solid #1f2937;
-}
-
-.product button{
-    background:#22c55e;
-    border:none;
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-/* CART */
-.cart{
-    background:#111827;
-    margin:15px;
-    padding:15px;
-    border-radius:12px;
-}
-
-input,select{
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    border-radius:8px;
-    border:none;
-}
-
-a.btn{
-    display:block;
-    text-align:center;
-    margin-top:10px;
-    padding:10px;
-    background:#22c55e;
-    color:#000;
-    text-decoration:none;
-    font-weight:bold;
-    border-radius:10px;
-}
-
-footer{
-    text-align:center;
-    padding:15px;
-    font-size:12px;
-    color:#64748b;
+.whatsapp-btn{
+    width:100%;background:#25D366;color:white;padding:12px;
+    font-size:18px;font-weight:bold;border-radius:12px;margin-top:10px;
+    text-align:center;display:block;text-decoration:none;
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
-<h1>🎮 Arena TopUp</h1>
-<p>شحن ألعاب فوري - آمن - سريع</p>
+<h1>Sudan-Store</h1>
+<div>خدمة شحن ألعاب وبطاقات</div>
 </header>
 
-<div class="hero">
-<h2>أفضل متجر لشحن <span>الجواهر والألعاب</span></h2>
+<div class="control-box">
+<select id="currency">
+<option value="SDG">SDG</option>
+<option value="EGP">EGP</option>
+</select>
 </div>
 
-<div class="features">
-<div class="feature">⚡ شحن فوري</div>
-<div class="feature">🔒 آمن 100%</div>
-<div class="feature">💎 أسعار مناسبة</div>
-<div class="feature">🎧 دعم 24/7</div>
-</div>
-
-<div class="products">
-<div class="product">
+<div class="item">
 <span>110 جوهرة</span>
-<button onclick="add('110 جوهرة',55)">إضافة</button>
+<span class="add" onclick="addToCart('110 جوهرة',3600)">إضافة</span>
 </div>
 
-<div class="product">
+<div class="item">
 <span>231 جوهرة</span>
-<button onclick="add('231 جوهرة',115)">إضافة</button>
+<span class="add" onclick="addToCart('231 جوهرة',7500)">إضافة</span>
 </div>
 
-<div class="product">
+<div class="item">
 <span>583 جوهرة</span>
-<button onclick="add('583 جوهرة',280)">إضافة</button>
-</div>
+<span class="add" onclick="addToCart('583 جوهرة',18000)">إضافة</span>
 </div>
 
-<div class="cart">
+<div class="cart-box">
+
 <h3>🛒 السلة</h3>
 
 <div id="list">لا يوجد عناصر</div>
 
-<input id="id" placeholder="Player ID">
+<input id="playerID" placeholder="Player ID">
+<input id="notes" placeholder="ملاحظات">
+
 <select id="pay">
 <option>بنكك</option>
 <option>فوري</option>
 <option>أوكاش</option>
 </select>
 
-async function send(){
+<a class="whatsapp-btn" onclick="sendOrder()">إرسال الطلب</a>
 
-let id=document.getElementById("id").value;
+</div>
+
+<script>
+let cart=[];
+
+// ===== إضافة للسلة =====
+function addToCart(name,price){
+cart.push({name,price});
+render();
+}
+
+// ===== عرض السلة =====
+function render(){
+let list="";
+cart.forEach(c=>{
+list+=`• ${c.name} - ${c.price}<br>`;
+});
+document.getElementById("list").innerHTML=list || "لا يوجد عناصر";
+}
+
+// ===== إرسال الطلب + حفظ Firebase =====
+async function sendOrder(){
+
+let id=document.getElementById("playerID").value;
 let pay=document.getElementById("pay").value;
+let notes=document.getElementById("notes").value;
 
 if(cart.length===0){
 alert("السلة فارغة");
 return;
 }
 
-let order = {
-items: cart,
-playerID: id,
-payment: pay,
-status: "جديد",
-time: new Date().toISOString()
-};
+// WhatsApp message
+let msg="طلب جديد:\n";
+
+cart.forEach(c=>{
+msg+=`${c.name} - ${c.price}\n`;
+});
+
+msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
+
+window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
 
 // حفظ في Firebase
-await addDoc(collection(db,"orders"), order);
-
-let msg="طلب جديد:\n";
-
-cart.forEach(c=>{
-msg+=`${c.name} - ${c.price}\n`;
+if(window.saveOrder){
+await saveOrder({
+items:cart,
+playerID:id,
+payment:pay,
+notes:notes,
+time:new Date().toISOString()
 });
+}
 
-msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
-
-window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
-
-// تفريغ السلة
 cart=[];
 render();
-alert("تم إرسال الطلب وحفظه بنجاح ✅");
-}
-
-<footer>
-© Arena TopUp - جميع الحقوق محفوظة
-</footer>
-
-<script>
-let cart=[];
-
-function add(name,price){
-cart.push({name,price});
-render();
-}
-
-function render(){
-let list="";
-cart.forEach(c=>{
-list+=`• ${c.name} - ${c.price}$<br>`;
-});
-document.getElementById("list").innerHTML=list || "لا يوجد عناصر";
-}
-
-function send(){
-let id=document.getElementById("id").value;
-let pay=document.getElementById("pay").value;
-
-let msg="طلب جديد:\n";
-
-cart.forEach(c=>{
-msg+=`${c.name} - ${c.price}\n`;
-});
-
-msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
-
-window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
+alert("تم إرسال الطلب بنجاح ✅");
 }
 </script>
+
+<!-- Firebase -->
 <script type="module">
-import { db, collection, addDoc } from "./firebase.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "arenatopup09.firebaseapp.com",
+  projectId: "arenatopup09",
+  storageBucket: "arenatopup09.appspot.com",
+  messagingSenderId: "26967872918",
+  appId: "1:26967872918:web:da333cb50f309922b579b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// جعلها global
+window.saveOrder = async function(order){
+await addDoc(collection(db,"orders"),order);
+};
+</script>
+
 </body>
 </html>
