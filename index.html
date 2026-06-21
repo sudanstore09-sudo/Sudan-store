@@ -3,212 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sudan-Store</title>
+<title>Arena TopUp | شحن جواهر فوري</title>
+
 <style>
 body{
-    font-family:'Tajawal',sans-serif;
-    direction:rtl;
     margin:0;
-    background:#f4f4f4;
-    overflow-x:hidden;
+    font-family:Arial;
+    direction:rtl;
+    background:#0b0f1a;
+    color:#fff;
 }
-header{
-    background:linear-gradient(45deg,#e10600,#000,#009739);
-    color:#fff;text-align:center;padding:25px 0;
-    border-bottom-left-radius:25px;border-bottom-right-radius:25px;
-}
-header h1{margin:0;font-size:34px;font-weight:800;}
-header h1::before{content:"🛒 ";}
 
-.control-box{
-    width:90%;margin:15px auto;background:#fff;padding:12px;
-    border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
+/* ===== HEADER ===== */
+header{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    padding:20px;
+    text-align:center;
+    position:relative;
 }
-select,input,button{
-    flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#facc15;
+}
+
+.logo span{color:#38bdf8;}
+
+/* ===== HERO ===== */
+.hero{
+    text-align:center;
+    padding:30px 15px;
+}
+
+.hero h1{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#cbd5e1;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+    display:inline-block;
+    padding:12px 20px;
+    margin-top:10px;
+    background:#22c55e;
+    color:#fff;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* ===== TIMER ===== */
+.timer{
+    background:#111827;
+    padding:10px;
+    margin:15px;
+    border-radius:10px;
+    color:#facc15;
+    text-align:center;
+}
+
+/* ===== PRODUCTS ===== */
+.products{
+    padding:10px;
 }
 
 .item{
-    width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 10px #0001;display:flex;justify-content:space-between;align-items:center;
+    background:#111827;
+    margin:10px;
+    padding:15px;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.gem{font-size:22px;font-weight:bold;color:#009739;}
-.gem::before{content:"💎 ";}
-.price{font-size:14px;color:#333;margin-left:10px;}
+
 .add{
-    background:#e10600;color:white;border-radius:10px;padding:7px 15px;
-    font-weight:bold;cursor:pointer;
-}
-.add:hover{background:#000;}
-
-.cart-box{
-    width:90%;background:white;margin:25px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 8px #0002;
-}
-.cart-title{font-size:22px;font-weight:700;margin-bottom:10px;}
-.cart-total{font-size:18px;color:#009739;font-weight:bold;margin:10px 0;}
-.cart-input{
-    width:100%;margin:6px 0;padding:10px;border-radius:10px;
-    border:1px solid #ccc;font-size:15px;
-}
-.whatsapp-btn{
-    width:100%;background:#25D366;color:white;padding:12px;
-    font-size:18px;font-weight:bold;border-radius:12px;margin-top:10px;
-    text-align:center;display:block;text-decoration:none;
+    background:#ef4444;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-#notify{
-    position:fixed;top:20px;left:50%;transform:translateX(-50%);
-    background:#25d366;color:#fff;padding:10px 20px;border-radius:6px;
-    display:none;font-weight:bold;z-index:999;
+/* ===== CART ===== */
+.cart{
+    background:#0f172a;
+    margin:15px;
+    padding:15px;
+    border-radius:12px;
 }
 
-#floatCart{
-    position:fixed;bottom:20px;left:20px;background:#009739;color:#fff;
-    font-size:22px;padding:12px 18px;border-radius:50px;
-    text-align:center;cursor:pointer;z-index:999;
+input,select{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+    border-radius:8px;
+    border:none;
+}
+
+/* ===== REVIEWS ===== */
+.review{
+    background:#111827;
+    margin:10px;
+    padding:10px;
+    border-radius:10px;
+    font-size:14px;
+    color:#d1d5db;
+}
+
+/* ===== FLOAT BUTTON ===== */
+.float{
+    position:fixed;
+    bottom:15px;
+    right:15px;
+    background:#25D366;
+    padding:15px;
+    border-radius:50px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>Sudan-Store</h1>
-<div>خدمة شحن ألعاب وبطاقات — SDG / EGP</div>
+<div class="logo">🎮 Arena <span>TopUp</span></div>
+<p>شحن جواهر فري فاير فوري 🔥</p>
 </header>
 
-<div class="control-box">
-<select id="currency">
-<option value="SDG">💵 SDG</option>
-<option value="EGP">💰 EGP</option>
-</select>
-<input id="search" placeholder="ابحث عن باقة مثال: 110">
+<div class="hero">
+<h1>اشحن جواهرك الآن بسرعة وأمان 💎</h1>
+<p>دعم مباشر + أسعار مناسبة + شحن فوري</p>
+<a class="btn" href="https://wa.me/201035179385">اطلب الآن واتساب</a>
 </div>
 
-<div id="notify">تمت الإضافة للسلة ✅</div>
+<!-- TIMER -->
+<div class="timer">
+🔥 العرض ينتهي خلال: <span id="time"></span>
+</div>
 
-<!-- السلة -->
-<div class="cart-box">
-<div class="cart-title">🛍 سلة المشتريات</div>
-<div id="cart-content">لا توجد عناصر بعد</div>
-<div id="cart-total" class="cart-total">الإجمالي: 0 SDG / 0 EGP</div>
-<select class="cart-input" id="payMethod">
+<!-- PRODUCTS -->
+<div class="products" id="products"></div>
+
+<!-- CART -->
+<div class="cart">
+<h3>🛒 السلة</h3>
+
+<div id="cartList">لا توجد عناصر</div>
+
+<select id="pay">
+<option>فودافون كاش</option>
 <option>بنكك</option>
-<option>ماي كاشي</option>
-<option>برافو</option>
-<option>فوري</option>
-<option>أوكاش</option>
 </select>
-<input id="playerID" class="cart-input" placeholder="أدخل ID اللعبة">
-<input id="notes" class="cart-input" placeholder="ملاحظات إضافية">
-<a id="sendW" class="whatsapp-btn" href="#">إرسال الطلب للواتساب 📩</a>
+
+<input id="uid" placeholder="ID اللاعب">
+<input id="note" placeholder="ملاحظات">
+
+<a class="btn" id="send" href="#">إرسال الطلب</a>
 </div>
 
-<div id="floatCart" onclick="scrollToCart()">🛒</div>
+<!-- REVIEWS -->
+<div class="review">⭐⭐⭐⭐⭐ خدمة سريعة جدًا 👍</div>
+<div class="review">⭐⭐⭐⭐⭐ أفضل سعر جربته 🔥</div>
+<div class="review">⭐⭐⭐⭐⭐ تم الشحن خلال دقائق 💎</div>
+
+<a class="float" href="https://wa.me/201035179385">واتساب 💬</a>
 
 <script>
-// ======== بيانات المنتجات ========
-let cart=[];
-const products = [
-    {name:"110 جوهرة", sdg:3600, egp:55},
-    {name:"231 جوهرة", sdg:7500, egp:115},
-    {name:"583 جوهرة", sdg:18000, egp:280},
-    {name:"1180 جوهرة", sdg:35500, egp:550},
-    {name:"2420 جوهرة", sdg:70500, egp:1100},
-    {name:"عضوية أسبوعية", sdg:8600, egp:120},
-    {name:"عضوية شهرية", sdg:40500, egp:530},
+
+/* ====== ⭐ تعديل الأسعار من هنا فقط ====== */
+const PRODUCTS = [
+ {name:"110 جوهرة", price:55},
+ {name:"231 جوهرة", price:115},
+ {name:"583 جوهرة", price:280},
+ {name:"1180 جوهرة", price:550}
 ];
 
-// ======== عرض المنتجات حسب العملة ========
-function renderProducts(){
-    const currency = document.getElementById("currency").value;
-    const controlBox = document.querySelector('.control-box');
-    // إزالة المنتجات القديمة
-    document.querySelectorAll('.item').forEach(i=>i.remove());
+let cart=[];
 
-    // إنشاء HTML للمنتجات
-    const itemsHTML = products.map(p=>{
-        const price = currency === "SDG" ? p.sdg+" SDG" : p.egp+" EGP";
-        return `<div class="item">
-            <span class="gem">${p.name}</span>
-            <span class="price">${price}</span>
-            <span class="add" onclick="addToCart('${p.name}',${p.sdg},${p.egp})">إضافة</span>
-        </div>`;
-    }).join('');
+/* ====== عرض المنتجات ====== */
+function load(){
+ let html="";
+ PRODUCTS.forEach((p,i)=>{
+ html+=`
+ <div class="item">
+ <div>${p.name} - 💰 ${p.price} EGP</div>
+ <div class="add" onclick="add(${i})">إضافة</div>
+ </div>`;
+ });
+ document.getElementById("products").innerHTML=html;
+}
+load();
 
-    controlBox.insertAdjacentHTML('afterend', itemsHTML);
+/* ====== إضافة للسلة ====== */
+function add(i){
+ cart.push(PRODUCTS[i]);
+ update();
 }
 
-// ======== سلة الشراء ========
-function showNotify(){
-    const n=document.getElementById("notify");
-    n.style.display="block";
-    setTimeout(()=>n.style.display="none",1200);
+function update(){
+ let text="";
+ let total=0;
+
+ cart.forEach(c=>{
+ text+=c.name+"<br>";
+ total+=c.price;
+ });
+
+ document.getElementById("cartList").innerHTML=
+ text || "لا توجد عناصر";
+
+ let msg=`طلب جديد:
+${text}
+الإجمالي: ${total} EGP
+ID: ${document.getElementById("uid").value}
+ملاحظات: ${document.getElementById("note").value}`;
+
+ document.getElementById("send").href=
+ "https://wa.me/201035179385?text="+encodeURIComponent(msg);
 }
 
-function addToCart(name,sdg,egp){
-    cart.push({name,sdg,egp});
-    showNotify();
-    updateCart();
-}
+/* ====== عداد ====== */
+let t=24*60*60;
+setInterval(()=>{
+ let h=Math.floor(t/3600);
+ let m=Math.floor((t%3600)/60);
+ let s=t%60;
+ document.getElementById("time").innerText=`${h}:${m}:${s}`;
+ t--;
+},1000);
 
-function updateCart(){
-    let list="",sdg=0,egp=0;
-    cart.forEach(c=>{
-        list+=`• ${c.name}\n`;
-        sdg+=c.sdg;
-        egp+=c.egp;
-    });
-
-    document.getElementById("cart-content").innerHTML =
-        list ? list.replace(/\n/g,"<br>") : "لا توجد عناصر";
-
-    const currency = document.getElementById("currency").value;
-    if(currency==="SDG"){
-        document.getElementById("cart-total").innerHTML = `الإجمالي: ${sdg} SDG`;
-    } else {
-        document.getElementById("cart-total").innerHTML = `الإجمالي: ${egp} EGP`;
-    }
-
-    generateWhatsAppLink(list,sdg,egp);
-}
-
-function generateWhatsAppLink(list,sdg,egp){
-    if(cart.length===0){document.getElementById("sendW").href="#";return;}
-    let method=document.getElementById("payMethod").value;
-    let ID=document.getElementById("playerID").value.trim();
-    let notes=document.getElementById("notes").value.trim();
-    if(ID===""){document.getElementById("sendW").href="#";return;}
-
-    const currency = document.getElementById("currency").value;
-    const total = currency==="SDG"?sdg+" SDG":egp+" EGP";
-
-    let message =
-`طلب جديد من Sudan-Store:
-الباقات:
-${list}
-طريقة الدفع: ${method}
-ID اللاعب: ${ID}
-ملاحظات: ${notes}
-الإجمالي: ${total}`;
-
-    document.getElementById("sendW").href =
-        `https://wa.me/201035179385?text=${encodeURIComponent(message)}`;
-}
-
-// ======== تحديث ديناميكي ========
-document.getElementById("playerID").addEventListener("input", updateCart);
-document.getElementById("notes").addEventListener("input", updateCart);
-document.getElementById("payMethod").addEventListener("change", updateCart);
-document.getElementById("currency").addEventListener("change", ()=>{ renderProducts(); updateCart(); });
-
-// ======== تمرير السلة للتمرير ========
-function scrollToCart(){
-    document.querySelector('.cart-box').scrollIntoView({behavior:'smooth'});
-}
-
-// ======== عرض المنتجات عند التحميل ========
-renderProducts();
 </script>
 
 </body>
