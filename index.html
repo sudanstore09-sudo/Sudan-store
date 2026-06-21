@@ -20,6 +20,7 @@ header{
     color:#fff;text-align:center;padding:25px 0;
     border-bottom-left-radius:25px;border-bottom-right-radius:25px;
 }
+
 header h1{margin:0;font-size:34px;font-weight:800;}
 header h1::before{content:"🛒 ";}
 
@@ -27,6 +28,7 @@ header h1::before{content:"🛒 ";}
     width:90%;margin:15px auto;background:#fff;padding:12px;
     border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
 }
+
 select,input{
     flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
 }
@@ -35,8 +37,10 @@ select,input{
     width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
     box-shadow:0 0 10px #0001;display:flex;justify-content:space-between;align-items:center;
 }
+
 .gem{font-size:22px;font-weight:bold;color:#009739;}
 .price{font-size:14px;color:#333;margin-left:10px;}
+
 .add{
     background:#e10600;color:white;border-radius:10px;padding:7px 15px;
     font-weight:bold;cursor:pointer;
@@ -128,38 +132,50 @@ list+=`• ${c.name} - ${c.price}<br>`;
 document.getElementById("list").innerHTML=list || "لا يوجد عناصر";
 }
 
-// ===== إرسال الطلب + حفظ Firebase =====
+// ===== إرسال الطلب =====
 async function sendOrder(){
 
-let id=document.getElementById("playerID").value;
+let id=document.getElementById("playerID").value.trim();
 let pay=document.getElementById("pay").value;
-let notes=document.getElementById("notes").value;
+let notes=document.getElementById("notes").value.trim();
 
 if(cart.length===0){
 alert("السلة فارغة");
 return;
 }
 
-// WhatsApp message
+if(id===""){
+alert("من فضلك أدخل Player ID");
+return;
+}
+
+// حساب الإجمالي
+let total = cart.reduce((sum,i)=>sum+i.price,0);
+
+// WhatsApp Message
 let msg="طلب جديد:\n";
 
 cart.forEach(c=>{
 msg+=`${c.name} - ${c.price}\n`;
 });
 
-msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
+msg+=`\nID: ${id}\nطريقة الدفع: ${pay}\nالإجمالي: ${total}`;
 
 window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
 
-// حفظ في Firebase
+// حفظ في Firebase (لو متاح)
 if(window.saveOrder){
+
 await saveOrder({
-items:cart,
-playerID:id,
-payment:pay,
-notes:notes,
-time:new Date().toISOString()
+items: cart,
+playerID: id,
+payment: pay,
+notes: notes,
+total: total,
+status: "جديد",
+createdAt: new Date().toISOString()
 });
+
 }
 
 cart=[];
@@ -168,7 +184,7 @@ alert("تم إرسال الطلب بنجاح ✅");
 }
 </script>
 
-<!-- Firebase -->
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
@@ -185,9 +201,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// جعلها global
+// global function
 window.saveOrder = async function(order){
-await addDoc(collection(db,"orders"),order);
+    await addDoc(collection(db,"orders"), order);
 };
 </script>
 
