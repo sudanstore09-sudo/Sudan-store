@@ -4,251 +4,219 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sudan-Store | شحن ألعاب فوري</title>
+<title>Arena TopUp | شحن ألعاب فوري</title>
 
-<meta name="description" content="متجر شحن ألعاب فري فاير وببجي بأسعار مناسبة وسرعة تسليم فورية">
-<meta name="keywords" content="شحن فري فاير, جواهر, ببجي, شحن ألعاب">
-<meta name="author" content="Sudan Store">
+<meta name="description" content="متجر Arena TopUp لشحن الألعاب - جواهر فري فاير وببجي بسرعة وأمان وأسعار مناسبة">
+<meta name="keywords" content="شحن فري فاير, جواهر, ببجي, شحن ألعاب, Arena TopUp">
+<meta name="author" content="Arena TopUp">
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 body{
-    font-family:'Tajawal',sans-serif;
-    direction:rtl;
     margin:0;
-    background:#f4f4f4;
-    overflow-x:hidden;
+    font-family:'Tajawal',sans-serif;
+    background:#0f172a;
+    color:#fff;
 }
-/* نفس ستايلك بدون تغيير */
+
+/* HEADER */
 header{
-    background:linear-gradient(45deg,#e10600,#000,#009739);
-    color:#fff;text-align:center;padding:25px 0;
-    border-bottom-left-radius:25px;border-bottom-right-radius:25px;
-}
-header h1{margin:0;font-size:34px;font-weight:800;}
-header h1::before{content:"🛒 ";}
-
-.control-box{
-    width:90%;margin:15px auto;background:#fff;padding:12px;
-    border-radius:14px;box-shadow:0 0 10px #0002;display:flex;gap:10px;
-}
-select,input,button{
-    flex:1;border-radius:10px;padding:9px;border:1px solid #ddd;font-size:15px;
+    background:linear-gradient(45deg,#111827,#1f2937);
+    padding:25px;
+    text-align:center;
+    border-bottom:2px solid #22c55e;
 }
 
-.item{
-    width:90%;background:#fff;margin:12px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 10px #0001;display:flex;justify-content:space-between;align-items:center;
-}
-.gem{font-size:22px;font-weight:bold;color:#009739;}
-.gem::before{content:"💎 ";}
-.price{font-size:14px;color:#333;margin-left:10px;}
-.add{
-    background:#e10600;color:white;border-radius:10px;padding:7px 15px;
-    font-weight:bold;cursor:pointer;
-}
-.add:hover{background:#000;}
-
-.cart-box{
-    width:90%;background:white;margin:25px auto;padding:15px;border-radius:15px;
-    box-shadow:0 0 8px #0002;
-}
-.cart-title{font-size:22px;font-weight:700;margin-bottom:10px;}
-.cart-total{font-size:18px;color:#009739;font-weight:bold;margin:10px 0;}
-.cart-input{
-    width:100%;margin:6px 0;padding:10px;border-radius:10px;
-    border:1px solid #ccc;font-size:15px;
-}
-.whatsapp-btn{
-    width:100%;background:#25D366;color:white;padding:12px;
-    font-size:18px;font-weight:bold;border-radius:12px;margin-top:10px;
-    text-align:center;display:block;text-decoration:none;
+header h1{
+    margin:0;
+    font-size:32px;
+    color:#22c55e;
 }
 
-#notify{
-    position:fixed;top:20px;left:50%;transform:translateX(-50%);
-    background:#25d366;color:#fff;padding:10px 20px;border-radius:6px;
-    display:none;font-weight:bold;z-index:999;
+header p{
+    margin-top:5px;
+    font-size:14px;
+    color:#cbd5e1;
 }
 
-#floatCart{
-    position:fixed;bottom:20px;left:20px;background:#009739;color:#fff;
-    font-size:22px;padding:12px 18px;border-radius:50px;
-    text-align:center;cursor:pointer;z-index:999;
+/* HERO */
+.hero{
+    text-align:center;
+    padding:25px;
+}
+
+.hero h2{
+    font-size:22px;
+}
+
+.hero span{
+    color:#22c55e;
+}
+
+/* FEATURES */
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    padding:15px;
+}
+
+.feature{
+    background:#111827;
+    padding:10px;
+    border-radius:10px;
+    text-align:center;
+    font-size:13px;
+}
+
+/* PRODUCTS */
+.products{
+    padding:15px;
+}
+
+.product{
+    background:#111827;
+    margin-bottom:10px;
+    padding:15px;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid #1f2937;
+}
+
+.product button{
+    background:#22c55e;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* CART */
+.cart{
+    background:#111827;
+    margin:15px;
+    padding:15px;
+    border-radius:12px;
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:8px;
+    border:none;
+}
+
+a.btn{
+    display:block;
+    text-align:center;
+    margin-top:10px;
+    padding:10px;
+    background:#22c55e;
+    color:#000;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:10px;
+}
+
+footer{
+    text-align:center;
+    padding:15px;
+    font-size:12px;
+    color:#64748b;
 }
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>Sudan-Store</h1>
-<div>خدمة شحن ألعاب وبطاقات — SDG / EGP</div>
+<h1>🎮 Arena TopUp</h1>
+<p>شحن ألعاب فوري - آمن - سريع</p>
 </header>
 
-<div class="control-box">
-<select id="currency">
-<option value="SDG">💵 SDG</option>
-<option value="EGP">💰 EGP</option>
-</select>
-<input id="search" placeholder="ابحث عن باقة مثال: 110">
+<div class="hero">
+<h2>أفضل متجر لشحن <span>الجواهر والألعاب</span></h2>
 </div>
 
-<div id="notify">تمت الإضافة للسلة ✅</div>
+<div class="features">
+<div class="feature">⚡ شحن فوري</div>
+<div class="feature">🔒 آمن 100%</div>
+<div class="feature">💎 أسعار مناسبة</div>
+<div class="feature">🎧 دعم 24/7</div>
+</div>
 
-<div class="cart-box">
-<div class="cart-title">🛍 سلة المشتريات</div>
-<div id="cart-content">لا توجد عناصر بعد</div>
-<div id="cart-total" class="cart-total">الإجمالي: 0 SDG / 0 EGP</div>
+<div class="products">
+<div class="product">
+<span>110 جوهرة</span>
+<button onclick="add('110 جوهرة',55)">إضافة</button>
+</div>
 
-<select class="cart-input" id="payMethod">
+<div class="product">
+<span>231 جوهرة</span>
+<button onclick="add('231 جوهرة',115)">إضافة</button>
+</div>
+
+<div class="product">
+<span>583 جوهرة</span>
+<button onclick="add('583 جوهرة',280)">إضافة</button>
+</div>
+</div>
+
+<div class="cart">
+<h3>🛒 السلة</h3>
+
+<div id="list">لا يوجد عناصر</div>
+
+<input id="id" placeholder="Player ID">
+<select id="pay">
 <option>بنكك</option>
-<option>ماي كاشي</option>
-<option>برافو</option>
 <option>فوري</option>
 <option>أوكاش</option>
 </select>
 
-<input id="playerID" class="cart-input" placeholder="أدخل ID اللعبة">
-<input id="notes" class="cart-input" placeholder="ملاحظات إضافية">
-<a id="sendW" class="whatsapp-btn" href="#">إرسال الطلب للواتساب 📩</a>
+<a class="btn" onclick="send()">إرسال الطلب</a>
 </div>
 
-<div id="floatCart" onclick="scrollToCart()">🛒</div>
+<footer>
+© Arena TopUp - جميع الحقوق محفوظة
+</footer>
 
 <script>
-// ======== بيانات المنتجات ========
 let cart=[];
-const products = [
-    {name:"110 جوهرة", sdg:3600, egp:55},
-    {name:"231 جوهرة", sdg:7500, egp:115},
-    {name:"583 جوهرة", sdg:18000, egp:280},
-    {name:"1180 جوهرة", sdg:35500, egp:550},
-    {name:"2420 جوهرة", sdg:70500, egp:1100},
-    {name:"عضوية أسبوعية", sdg:8600, egp:120},
-    {name:"عضوية شهرية", sdg:40500, egp:530},
-];
 
-// ======== VISITS ========
-let visits = localStorage.getItem("visits") || 0;
-visits++;
-localStorage.setItem("visits",visits);
-
-// ======== عرض المنتجات ========
-function renderProducts(){
-    const currency = document.getElementById("currency").value;
-    const controlBox = document.querySelector('.control-box');
-    document.querySelectorAll('.item').forEach(i=>i.remove());
-
-    const itemsHTML = products.map(p=>{
-        const price = currency === "SDG" ? p.sdg+" SDG" : p.egp+" EGP";
-        return `<div class="item">
-            <span class="gem">${p.name}</span>
-            <span class="price">${price}</span>
-            <span class="add" onclick="addToCart('${p.name}',${p.sdg},${p.egp})">إضافة</span>
-        </div>`;
-    }).join('');
-
-    controlBox.insertAdjacentHTML('afterend', itemsHTML);
+function add(name,price){
+cart.push({name,price});
+render();
 }
 
-// ======== CART ========
-function showNotify(){
-    const n=document.getElementById("notify");
-    n.style.display="block";
-    setTimeout(()=>n.style.display="none",1200);
+function render(){
+let list="";
+cart.forEach(c=>{
+list+=`• ${c.name} - ${c.price}$<br>`;
+});
+document.getElementById("list").innerHTML=list || "لا يوجد عناصر";
 }
 
-function addToCart(name,sdg,egp){
-    cart.push({name,sdg,egp});
-    showNotify();
-    updateCart();
-}
+function send(){
+let id=document.getElementById("id").value;
+let pay=document.getElementById("pay").value;
 
-function updateCart(){
-    let list="",sdg=0,egp=0;
+let msg="طلب جديد:\n";
 
-    cart.forEach(c=>{
-        list+=`• ${c.name}\n`;
-        sdg+=c.sdg;
-        egp+=c.egp;
-    });
+cart.forEach(c=>{
+msg+=`${c.name} - ${c.price}\n`;
+});
 
-    document.getElementById("cart-content").innerHTML =
-        list ? list.replace(/\n/g,"<br>") : "لا توجد عناصر";
+msg+=`\nID: ${id}\nطريقة الدفع: ${pay}`;
 
-    const currency = document.getElementById("currency").value;
-    document.getElementById("cart-total").innerHTML =
-        currency==="SDG" ? `الإجمالي: ${sdg} SDG` : `الإجمالي: ${egp} EGP`;
-
-    generateWhatsAppLink(list,sdg,egp);
-}
-
-// ======== إرسال الطلب ========
-function generateWhatsAppLink(list,sdg,egp){
-
-    if(cart.length===0){return;}
-
-    let method=document.getElementById("payMethod").value;
-    let ID=document.getElementById("playerID").value.trim();
-    let notes=document.getElementById("notes").value.trim();
-
-    if(ID===""){return;}
-
-    const currency = document.getElementById("currency").value;
-    const total = currency==="SDG"?sdg+" SDG":egp+" EGP";
-
-    let message =
-`طلب جديد:
-${list}
-طريقة الدفع: ${method}
-ID: ${ID}
-ملاحظات: ${notes}
-الإجمالي: ${total}`;
-
-    document.getElementById("sendW").href =
-        `https://wa.me/201035179385?text=${encodeURIComponent(message)}`;
-
-    // ===== حفظ الطلب في Firebase =====
-    if(window.saveOrder){
-        saveOrder({
-            items:list,
-            method:method,
-            playerID:ID,
-            notes:notes,
-            total:total,
-            date:new Date().toISOString()
-        });
-    }
-}
-
-// ======== SCROLL ========
-function scrollToCart(){
-    document.querySelector('.cart-box').scrollIntoView({behavior:'smooth'});
-}
-
-renderProducts();
-</script>
-
-<!-- ===== FIREBASE (NEW) ===== -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "arenatopup09.firebaseapp.com",
-  projectId: "arenatopup09",
-  storageBucket: "arenatopup09.firebasestorage.app",
-  messagingSenderId: "26967872918",
-  appId: "1:26967872918:web:da333cb50f309922b579b7"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// حفظ الطلب
-window.saveOrder = async function(order){
-    await addDoc(collection(db,"orders"), order);
+window.open("https://wa.me/201035179385?text="+encodeURIComponent(msg));
 }
 </script>
 
