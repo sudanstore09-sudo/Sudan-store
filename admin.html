@@ -1,0 +1,49 @@
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDBMEwuXyyr3eiz1sL99oh-4sZDI8Sf5ck",
+  authDomain: "arenatopup09.firebaseapp.com",
+  projectId: "arenatopup09",
+  storageBucket: "arenatopup09.firebasestorage.app",
+  messagingSenderId: "26967872918",
+  appId: "1:26967872918:web:da333cb50f309922b579b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// LOGIN
+window.login = function(){
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, pass)
+  .then(()=>{
+      document.getElementById("loginBox").style.display="none";
+      document.getElementById("dashboard").style.display="block";
+      alert("تم تسجيل الدخول بنجاح 🔥");
+  })
+  .catch(e=>{
+      alert("خطأ في البيانات ❌");
+  });
+}
+
+// LOGOUT
+window.logout = function(){
+  signOut(auth).then(()=> location.reload());
+}
+
+// حماية الصفحة
+onAuthStateChanged(auth,(user)=>{
+  if(user){
+      document.getElementById("loginBox").style.display="none";
+      document.getElementById("dashboard").style.display="block";
+  } else {
+      document.getElementById("loginBox").style.display="block";
+      document.getElementById("dashboard").style.display="none";
+  }
+});
+</script>
